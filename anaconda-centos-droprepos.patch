@@ -1,0 +1,12 @@
+diff -uNr anaconda-13.21.117__orig/scripts/upd-instroot anaconda-13.21.117/scripts/upd-instroot
+--- anaconda-13.21.117__orig/scripts/upd-instroot	2011-05-10 17:44:53.000000000 +0000
++++ anaconda-13.21.117/scripts/upd-instroot	2011-11-20 16:15:06.304155311 +0000
+@@ -404,7 +404,7 @@
+ etc/sysconfig/network-scripts/network-functions*
+ etc/udev
+ etc/wpa_supplicant/wpa_supplicant.conf
+-etc/yum.repos.d/*
++etc/yum.repos.d/installer.repo
+ etc/yum/pluginconf.d/*.conf
+ lib/terminfo
+ lib/udev

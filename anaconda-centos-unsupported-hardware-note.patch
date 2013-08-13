@@ -1,0 +1,1408 @@
+diff -uNr anaconda-13.21.195__orig/loader/loader.c anaconda-13.21.195/loader/loader.c
+--- anaconda-13.21.195__orig/loader/loader.c	2012-11-26 20:42:02.000000000 +0000
++++ anaconda-13.21.195/loader/loader.c	2013-03-01 23:19:08.592377041 +0000
+@@ -1280,9 +1280,9 @@
+             startNewt();
+             newtWinMessage(_("Unsupported Hardware Detected"), _("OK"),
+                            _("This hardware (or a combination thereof) is not "
+-                             "supported by Red Hat.  For more information on "
++                             "supported by CentOS.  For more information on "
+                              "supported hardware, please refer to "
+-                             "http://www.redhat.com/hardware."));
++                             "http://www.centos.org/hardware."));
+             stopNewt();
+         } else {
+             logMessage(WARNING, "Installing on Unsupported Hardware.");
+diff -uNr anaconda-13.21.195__orig/po/af.po anaconda-13.21.195/po/af.po
+--- anaconda-13.21.195__orig/po/af.po	2013-01-23 01:22:21.000000000 +0000
++++ anaconda-13.21.195/po/af.po	2013-03-01 23:22:08.962121811 +0000
+@@ -3949,9 +3949,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/am.po anaconda-13.21.195/po/am.po
+--- anaconda-13.21.195__orig/po/am.po	2013-01-23 01:22:21.000000000 +0000
++++ anaconda-13.21.195/po/am.po	2013-03-01 23:22:09.006121748 +0000
+@@ -3900,9 +3900,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/ar.po anaconda-13.21.195/po/ar.po
+--- anaconda-13.21.195__orig/po/ar.po	2013-01-23 01:22:21.000000000 +0000
++++ anaconda-13.21.195/po/ar.po	2013-03-01 23:22:09.051121685 +0000
+@@ -4051,9 +4051,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/as.po anaconda-13.21.195/po/as.po
+--- anaconda-13.21.195__orig/po/as.po	2013-01-23 01:22:21.000000000 +0000
++++ anaconda-13.21.195/po/as.po	2013-03-01 23:22:09.100121615 +0000
+@@ -4333,12 +4333,12 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ "এই হাৰ্ডৱেৰ (অথবা এটা সংযুক্তি) Red Hat দ্বাৰা সমৰ্থিত নহয়। সমৰ্থিত হাৰ্ডৱেৰৰ বিষয়ে "
+-"অধিক তথ্যৰ বাবে, অনুগ্ৰহ কৰি http://www.redhat.com/hardware চাওক।"
++"অধিক তথ্যৰ বাবে, অনুগ্ৰহ কৰি http://www.centos.org/hardware চাওক।"
+ 
+ #: loader/loader.c:1348
+ msgid "Media Detected"
+diff -uNr anaconda-13.21.195__orig/po/bal.po anaconda-13.21.195/po/bal.po
+--- anaconda-13.21.195__orig/po/bal.po	2013-01-23 01:22:21.000000000 +0000
++++ anaconda-13.21.195/po/bal.po	2013-03-01 23:22:09.143121555 +0000
+@@ -3825,9 +3825,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/be.po anaconda-13.21.195/po/be.po
+--- anaconda-13.21.195__orig/po/be.po	2013-01-23 01:22:21.000000000 +0000
++++ anaconda-13.21.195/po/be.po	2013-03-01 23:22:09.186121494 +0000
+@@ -3856,9 +3856,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/bg.po anaconda-13.21.195/po/bg.po
+--- anaconda-13.21.195__orig/po/bg.po	2013-01-23 01:22:21.000000000 +0000
++++ anaconda-13.21.195/po/bg.po	2013-03-01 23:22:09.230121432 +0000
+@@ -4038,9 +4038,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/bn_IN.po anaconda-13.21.195/po/bn_IN.po
+--- anaconda-13.21.195__orig/po/bn_IN.po	2013-01-23 01:22:21.000000000 +0000
++++ anaconda-13.21.195/po/bn_IN.po	2013-03-01 23:22:09.280121361 +0000
+@@ -4387,12 +4387,12 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ "এই হার্ডওয়্যারটি (অথবা এটি সহ অন্য কোনো হার্ডওয়্যার) Red Hat দ্বারা সমর্থিত হবে "
+-"না।  সমর্থিত হার্ডওয়্যারের তথ্য জানার জন্য দেখুন: http://www.redhat.com/hardware."
++"না।  সমর্থিত হার্ডওয়্যারের তথ্য জানার জন্য দেখুন: http://www.centos.org/hardware."
+ 
+ #: loader/loader.c:1348
+ msgid "Media Detected"
+diff -uNr anaconda-13.21.195__orig/po/bn.po anaconda-13.21.195/po/bn.po
+--- anaconda-13.21.195__orig/po/bn.po	2013-01-23 01:22:21.000000000 +0000
++++ anaconda-13.21.195/po/bn.po	2013-03-01 23:22:09.329121291 +0000
+@@ -4367,9 +4367,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/bs.po anaconda-13.21.195/po/bs.po
+--- anaconda-13.21.195__orig/po/bs.po	2013-01-23 01:22:22.000000000 +0000
++++ anaconda-13.21.195/po/bs.po	2013-03-01 23:22:09.374121228 +0000
+@@ -3983,9 +3983,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/ca.po anaconda-13.21.195/po/ca.po
+--- anaconda-13.21.195__orig/po/ca.po	2013-01-23 01:22:22.000000000 +0000
++++ anaconda-13.21.195/po/ca.po	2013-03-01 23:22:09.421121161 +0000
+@@ -4210,9 +4210,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/cs.po anaconda-13.21.195/po/cs.po
+--- anaconda-13.21.195__orig/po/cs.po	2013-01-23 01:22:22.000000000 +0000
++++ anaconda-13.21.195/po/cs.po	2013-03-01 23:22:09.469121093 +0000
+@@ -4355,9 +4355,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/cy.po anaconda-13.21.195/po/cy.po
+--- anaconda-13.21.195__orig/po/cy.po	2013-01-23 01:22:22.000000000 +0000
++++ anaconda-13.21.195/po/cy.po	2013-03-01 23:22:09.513121031 +0000
+@@ -3986,9 +3986,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/da.po anaconda-13.21.195/po/da.po
+--- anaconda-13.21.195__orig/po/da.po	2013-01-23 01:22:22.000000000 +0000
++++ anaconda-13.21.195/po/da.po	2013-03-01 23:22:09.560120965 +0000
+@@ -4196,9 +4196,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/de_CH.po anaconda-13.21.195/po/de_CH.po
+--- anaconda-13.21.195__orig/po/de_CH.po	2013-01-23 01:22:22.000000000 +0000
++++ anaconda-13.21.195/po/de_CH.po	2013-03-01 23:22:09.606120899 +0000
+@@ -4246,9 +4246,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/de.po anaconda-13.21.195/po/de.po
+--- anaconda-13.21.195__orig/po/de.po	2013-01-23 01:22:22.000000000 +0000
++++ anaconda-13.21.195/po/de.po	2013-03-01 23:22:09.657120827 +0000
+@@ -4533,13 +4533,13 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ "Diese Hardware (oder in einer bestimmten Kombination) wird von Red Hat nicht "
+ "unterstützt. Weitere Informationen über unterstützte Hardware finden Sie auf "
+-"http://www.redhat.com/hardware."
++"http://www.centos.org/hardware."
+ 
+ #: loader/loader.c:1348
+ msgid "Media Detected"
+diff -uNr anaconda-13.21.195__orig/po/el.po anaconda-13.21.195/po/el.po
+--- anaconda-13.21.195__orig/po/el.po	2013-01-23 01:22:22.000000000 +0000
++++ anaconda-13.21.195/po/el.po	2013-03-01 23:22:09.705120759 +0000
+@@ -4254,9 +4254,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/en@boldquot.po anaconda-13.21.195/po/en@boldquot.po
+--- anaconda-13.21.195__orig/po/en@boldquot.po	2013-01-23 01:22:23.000000000 +0000
++++ anaconda-13.21.195/po/en@boldquot.po	2013-03-01 23:22:09.754120690 +0000
+@@ -4412,13 +4412,13 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
+-msgstr ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
++msgstr ""
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ 
+ #: loader/loader.c:1348
+ msgid "Media Detected"
+diff -uNr anaconda-13.21.195__orig/po/en_GB.po anaconda-13.21.195/po/en_GB.po
+--- anaconda-13.21.195__orig/po/en_GB.po	2013-01-23 01:22:24.000000000 +0000
++++ anaconda-13.21.195/po/en_GB.po	2013-03-01 23:22:09.798120628 +0000
+@@ -4004,9 +4004,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/en@quot.po anaconda-13.21.195/po/en@quot.po
+--- anaconda-13.21.195__orig/po/en@quot.po	2013-01-23 01:22:23.000000000 +0000
++++ anaconda-13.21.195/po/en@quot.po	2013-03-01 23:22:09.847120558 +0000
+@@ -4405,13 +4405,13 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
+-msgstr ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
++msgstr ""
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ 
+ #: loader/loader.c:1348
+ msgid "Media Detected"
+diff -uNr anaconda-13.21.195__orig/po/es.po anaconda-13.21.195/po/es.po
+--- anaconda-13.21.195__orig/po/es.po	2013-01-23 01:22:24.000000000 +0000
++++ anaconda-13.21.195/po/es.po	2013-03-01 23:22:09.896120489 +0000
+@@ -4462,13 +4462,13 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ "Este hardware (o a combinación del mismo) no está soportado por Red Hat.  "
+ "Para mayor información sobre hardware con soporte, por favor consulte http://"
+-"www.redhat.com/hardware."
++"www.centos.org/hardware."
+ 
+ #: loader/loader.c:1348
+ msgid "Media Detected"
+diff -uNr anaconda-13.21.195__orig/po/et.po anaconda-13.21.195/po/et.po
+--- anaconda-13.21.195__orig/po/et.po	2013-01-23 01:22:24.000000000 +0000
++++ anaconda-13.21.195/po/et.po	2013-03-01 23:22:09.940120427 +0000
+@@ -3927,9 +3927,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/eu_ES.po anaconda-13.21.195/po/eu_ES.po
+--- anaconda-13.21.195__orig/po/eu_ES.po	2013-01-23 01:22:24.000000000 +0000
++++ anaconda-13.21.195/po/eu_ES.po	2013-03-01 23:22:09.983120366 +0000
+@@ -3826,9 +3826,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/eu.po anaconda-13.21.195/po/eu.po
+--- anaconda-13.21.195__orig/po/eu.po	2013-01-23 01:22:24.000000000 +0000
++++ anaconda-13.21.195/po/eu.po	2013-03-01 23:22:10.025120307 +0000
+@@ -3830,9 +3830,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/fa.po anaconda-13.21.195/po/fa.po
+--- anaconda-13.21.195__orig/po/fa.po	2013-01-23 01:22:24.000000000 +0000
++++ anaconda-13.21.195/po/fa.po	2013-03-01 23:22:10.073120239 +0000
+@@ -4274,9 +4274,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/fi.po anaconda-13.21.195/po/fi.po
+--- anaconda-13.21.195__orig/po/fi.po	2013-01-23 01:22:24.000000000 +0000
++++ anaconda-13.21.195/po/fi.po	2013-03-01 23:22:10.121120171 +0000
+@@ -4361,12 +4361,12 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ "Red Hat ei tue tätä laitetta tai laitteistoa.  Lisätietoa tuetuista "
+-"laitteista on osoitteessa http://www.redhat.com/hardware."
++"laitteista on osoitteessa http://www.centos.org/hardware."
+ 
+ #: loader/loader.c:1348
+ msgid "Media Detected"
+diff -uNr anaconda-13.21.195__orig/po/fr.po anaconda-13.21.195/po/fr.po
+--- anaconda-13.21.195__orig/po/fr.po	2013-01-23 01:22:24.000000000 +0000
++++ anaconda-13.21.195/po/fr.po	2013-03-01 23:22:10.172120099 +0000
+@@ -4527,13 +4527,13 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ "Ce matériel (ou cette combinaison de matériel) n'est pas pris en charge par "
+ "Red Hat. Pour obtenir davantage d'informations sur le matériel pris en "
+-"charge, veuillez vous reporter à http://www.redhat.com/hardware."
++"charge, veuillez vous reporter à http://www.centos.org/hardware."
+ 
+ #: loader/loader.c:1348
+ msgid "Media Detected"
+diff -uNr anaconda-13.21.195__orig/po/gl.po anaconda-13.21.195/po/gl.po
+--- anaconda-13.21.195__orig/po/gl.po	2013-01-23 01:22:24.000000000 +0000
++++ anaconda-13.21.195/po/gl.po	2013-03-01 23:22:10.215120038 +0000
+@@ -3833,9 +3833,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/gu.po anaconda-13.21.195/po/gu.po
+--- anaconda-13.21.195__orig/po/gu.po	2013-01-23 01:22:24.000000000 +0000
++++ anaconda-13.21.195/po/gu.po	2013-03-01 23:22:10.263119970 +0000
+@@ -4302,12 +4302,12 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ "આ હાર્ડવેર (અથવા તેનુ સંયોજન) Red Hat દ્દારા આધારભૂત નથી. આધારભૂત હાર્ડવેર પર વધારે "
+-"જાણકારી માટે, મહેરબાની કરીને http://www.redhat.com/hardware નો સંદર્ભ લો."
++"જાણકારી માટે, મહેરબાની કરીને http://www.centos.org/hardware નો સંદર્ભ લો."
+ 
+ #: loader/loader.c:1348
+ msgid "Media Detected"
+diff -uNr anaconda-13.21.195__orig/po/he.po anaconda-13.21.195/po/he.po
+--- anaconda-13.21.195__orig/po/he.po	2013-01-23 01:22:24.000000000 +0000
++++ anaconda-13.21.195/po/he.po	2013-03-01 23:22:10.308119906 +0000
+@@ -4024,9 +4024,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/hi.po anaconda-13.21.195/po/hi.po
+--- anaconda-13.21.195__orig/po/hi.po	2013-01-23 01:22:24.000000000 +0000
++++ anaconda-13.21.195/po/hi.po	2013-03-01 23:22:10.356119838 +0000
+@@ -4303,12 +4303,12 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ "यह हार्डवेयर (या इसका संयोग) Red Hat के द्वारा समर्थित नहीं है. असमर्थित हार्डवेयर के "
+-"बारे में अधिक सूचना के लिए, कृपया  इसका संदर्भ लें http://www.redhat.com/hardware."
++"बारे में अधिक सूचना के लिए, कृपया  इसका संदर्भ लें http://www.centos.org/hardware."
+ 
+ #: loader/loader.c:1348
+ msgid "Media Detected"
+diff -uNr anaconda-13.21.195__orig/po/hr.po anaconda-13.21.195/po/hr.po
+--- anaconda-13.21.195__orig/po/hr.po	2013-01-23 01:22:24.000000000 +0000
++++ anaconda-13.21.195/po/hr.po	2013-03-01 23:22:10.401119775 +0000
+@@ -4060,9 +4060,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/hu.po anaconda-13.21.195/po/hu.po
+--- anaconda-13.21.195__orig/po/hu.po	2013-01-23 01:22:24.000000000 +0000
++++ anaconda-13.21.195/po/hu.po	2013-03-01 23:22:10.447119709 +0000
+@@ -4182,9 +4182,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/hy.po anaconda-13.21.195/po/hy.po
+--- anaconda-13.21.195__orig/po/hy.po	2013-01-23 01:22:24.000000000 +0000
++++ anaconda-13.21.195/po/hy.po	2013-03-01 23:22:10.490119649 +0000
+@@ -3825,9 +3825,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/id.po anaconda-13.21.195/po/id.po
+--- anaconda-13.21.195__orig/po/id.po	2013-01-23 01:22:24.000000000 +0000
++++ anaconda-13.21.195/po/id.po	2013-03-01 23:22:10.538119581 +0000
+@@ -4306,13 +4306,13 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ "Perangkat keras ini (atau kombinasi daripadanya) tidak didukung oleh Red "
+ "Hat.  Untuk informasi lebih lanjut tentang perangkat keras terdukung, "
+-"silakan merujuk ke http://www.redhat.com/hardware."
++"silakan merujuk ke http://www.centos.org/hardware."
+ 
+ #: loader/loader.c:1348
+ msgid "Media Detected"
+diff -uNr anaconda-13.21.195__orig/po/ilo.po anaconda-13.21.195/po/ilo.po
+--- anaconda-13.21.195__orig/po/ilo.po	2013-01-23 01:22:24.000000000 +0000
++++ anaconda-13.21.195/po/ilo.po	2013-03-01 23:22:10.582119518 +0000
+@@ -3972,9 +3972,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/is.po anaconda-13.21.195/po/is.po
+--- anaconda-13.21.195__orig/po/is.po	2013-01-23 01:22:24.000000000 +0000
++++ anaconda-13.21.195/po/is.po	2013-03-01 23:22:10.627119455 +0000
+@@ -4088,9 +4088,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/it.po anaconda-13.21.195/po/it.po
+--- anaconda-13.21.195__orig/po/it.po	2013-01-23 01:22:24.000000000 +0000
++++ anaconda-13.21.195/po/it.po	2013-03-01 23:22:10.676119385 +0000
+@@ -4462,13 +4462,13 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ "Questo hardware (o la loro combinazione) non è supportato da Red Hat.  Per "
+ "maggiori informazioni sull'hardware supportato, fare riferimento a http://"
+-"www.redhat.com/hardware."
++"www.centos.org/hardware."
+ 
+ #: loader/loader.c:1348
+ msgid "Media Detected"
+diff -uNr anaconda-13.21.195__orig/po/ja.po anaconda-13.21.195/po/ja.po
+--- anaconda-13.21.195__orig/po/ja.po	2013-01-23 01:22:25.000000000 +0000
++++ anaconda-13.21.195/po/ja.po	2013-03-01 23:22:10.725119316 +0000
+@@ -4379,13 +4379,13 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ "お使いのハードウェア (またはシステム構成) は Red Hat によってサポートされてお"
+-"りません。 サポートされているハードウェアの詳細については、http://www.redhat."
+-"com/hardware をご参照ください。"
++"りません。 サポートされているハードウェアの詳細については、http://www.centos."
++"org/hardware をご参照ください。"
+ 
+ #: loader/loader.c:1348
+ msgid "Media Detected"
+diff -uNr anaconda-13.21.195__orig/po/ka.po anaconda-13.21.195/po/ka.po
+--- anaconda-13.21.195__orig/po/ka.po	2013-01-23 01:22:25.000000000 +0000
++++ anaconda-13.21.195/po/ka.po	2013-03-01 23:22:10.768119255 +0000
+@@ -3818,9 +3818,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/kn.po anaconda-13.21.195/po/kn.po
+--- anaconda-13.21.195__orig/po/kn.po	2013-01-23 01:22:25.000000000 +0000
++++ anaconda-13.21.195/po/kn.po	2013-03-01 23:22:10.817119186 +0000
+@@ -4372,12 +4372,12 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ "ಈ ಯಂತ್ರಾಂಶಕ್ಕೆ (ಅಥವ ಅದರ ಒಂದು ಸಂಯೋಜನೆ) Red Hat ನಿಂದ ಬೆಂಬಲವಿರುವುದಿಲ್ಲ. ಬೆಂಬಲಿತ "
+-"ಯಂತ್ರಾಂಶದ ಕುರಿತು ಹೆಚ್ಚಿನ ಮಾಹಿತಿಗಾಗಿ http://www.redhat.com/hardware ಅನ್ನು ನೋಡಿ."
++"ಯಂತ್ರಾಂಶದ ಕುರಿತು ಹೆಚ್ಚಿನ ಮಾಹಿತಿಗಾಗಿ http://www.centos.org/hardware ಅನ್ನು ನೋಡಿ."
+ 
+ #: loader/loader.c:1348
+ msgid "Media Detected"
+diff -uNr anaconda-13.21.195__orig/po/ko.po anaconda-13.21.195/po/ko.po
+--- anaconda-13.21.195__orig/po/ko.po	2013-01-23 01:22:25.000000000 +0000
++++ anaconda-13.21.195/po/ko.po	2013-03-01 23:22:10.866119117 +0000
+@@ -4330,12 +4330,12 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ "이 하드웨어 (또는 시스템 구성)은 Red Hat에서 지원하지 않습니다. 지원되는 하드"
+-"웨어에 대한 자세한 내용은 http://www.redhat.com/hardware에서 참조하십시오. "
++"웨어에 대한 자세한 내용은 http://www.centos.org/hardware에서 참조하십시오. "
+ 
+ #: loader/loader.c:1348
+ msgid "Media Detected"
+diff -uNr anaconda-13.21.195__orig/po/lt.po anaconda-13.21.195/po/lt.po
+--- anaconda-13.21.195__orig/po/lt.po	2013-01-23 01:22:25.000000000 +0000
++++ anaconda-13.21.195/po/lt.po	2013-03-01 23:22:10.909119056 +0000
+@@ -3847,9 +3847,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/lv.po anaconda-13.21.195/po/lv.po
+--- anaconda-13.21.195__orig/po/lv.po	2013-01-23 01:22:25.000000000 +0000
++++ anaconda-13.21.195/po/lv.po	2013-03-01 23:22:10.953118993 +0000
+@@ -3967,9 +3967,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/mai.po anaconda-13.21.195/po/mai.po
+--- anaconda-13.21.195__orig/po/mai.po	2013-01-23 01:22:25.000000000 +0000
++++ anaconda-13.21.195/po/mai.po	2013-03-01 23:22:10.999118928 +0000
+@@ -4130,9 +4130,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/mk.po anaconda-13.21.195/po/mk.po
+--- anaconda-13.21.195__orig/po/mk.po	2013-01-23 01:22:25.000000000 +0000
++++ anaconda-13.21.195/po/mk.po	2013-03-01 23:22:11.044118865 +0000
+@@ -4061,9 +4061,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/ml.po anaconda-13.21.195/po/ml.po
+--- anaconda-13.21.195__orig/po/ml.po	2013-01-23 01:22:25.000000000 +0000
++++ anaconda-13.21.195/po/ml.po	2013-03-01 23:22:11.093118795 +0000
+@@ -4348,12 +4348,12 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ "ഈ ഹാര്‍ഡ്‌വെയര്‍ Red Hat പിന്തുണയ്ക്കുന്നില്ല.  പിന്തുണയ്ക്കുന്ന ഹാര്‍ഡ്‌വെയര്‍ സംബന്ധിച്ചുള്ള കൂടുതല്‍ "
+-"വിവരങ്ങള്‍ക്കായി http://www.redhat.com/hardware കാണുക."
++"വിവരങ്ങള്‍ക്കായി http://www.centos.org/hardware കാണുക."
+ 
+ #: loader/loader.c:1348
+ msgid "Media Detected"
+diff -uNr anaconda-13.21.195__orig/po/mr.po anaconda-13.21.195/po/mr.po
+--- anaconda-13.21.195__orig/po/mr.po	2013-01-23 01:22:25.000000000 +0000
++++ anaconda-13.21.195/po/mr.po	2013-03-01 23:22:11.142118726 +0000
+@@ -4301,12 +4301,12 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ "हे हार्डवेअर (किंवा जोडणी) Red Hat तर्फे समर्थीत नाही.  समर्थीत हार्डेवअरविषयी अधिक "
+-"माहितीकरीता, कृपया http://www.redhat.com/hardware पहा."
++"माहितीकरीता, कृपया http://www.centos.org/hardware पहा."
+ 
+ #: loader/loader.c:1348
+ msgid "Media Detected"
+diff -uNr anaconda-13.21.195__orig/po/ms.po anaconda-13.21.195/po/ms.po
+--- anaconda-13.21.195__orig/po/ms.po	2013-01-23 01:22:25.000000000 +0000
++++ anaconda-13.21.195/po/ms.po	2013-03-01 23:22:11.186118664 +0000
+@@ -3958,9 +3958,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/nb.po anaconda-13.21.195/po/nb.po
+--- anaconda-13.21.195__orig/po/nb.po	2013-01-23 01:22:25.000000000 +0000
++++ anaconda-13.21.195/po/nb.po	2013-03-01 23:22:11.231118600 +0000
+@@ -4085,9 +4085,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/ne.po anaconda-13.21.195/po/ne.po
+--- anaconda-13.21.195__orig/po/ne.po	2013-01-23 01:22:25.000000000 +0000
++++ anaconda-13.21.195/po/ne.po	2013-03-01 23:22:11.276118536 +0000
+@@ -4008,9 +4008,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/nl.po anaconda-13.21.195/po/nl.po
+--- anaconda-13.21.195__orig/po/nl.po	2013-01-23 01:22:25.000000000 +0000
++++ anaconda-13.21.195/po/nl.po	2013-03-01 23:22:11.325118467 +0000
+@@ -4464,13 +4464,13 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ "Deze hardware (of een combinatie daarvan) wordt niet ondersteund door Red "
+ "Hat. Voor meer informatie over ondersteunde hardware, refereer je naar "
+-"http://www.redhat.com/hardware."
++"http://www.centos.org/hardware."
+ 
+ #: loader/loader.c:1348
+ msgid "Media Detected"
+diff -uNr anaconda-13.21.195__orig/po/nn.po anaconda-13.21.195/po/nn.po
+--- anaconda-13.21.195__orig/po/nn.po	2013-01-23 01:22:25.000000000 +0000
++++ anaconda-13.21.195/po/nn.po	2013-03-01 23:22:11.368118406 +0000
+@@ -3826,9 +3826,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/nso.po anaconda-13.21.195/po/nso.po
+--- anaconda-13.21.195__orig/po/nso.po	2013-01-23 01:22:25.000000000 +0000
++++ anaconda-13.21.195/po/nso.po	2013-03-01 23:22:11.412118344 +0000
+@@ -3977,9 +3977,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/or.po anaconda-13.21.195/po/or.po
+--- anaconda-13.21.195__orig/po/or.po	2013-01-23 01:22:25.000000000 +0000
++++ anaconda-13.21.195/po/or.po	2013-03-01 23:22:11.461118275 +0000
+@@ -4332,12 +4332,12 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ "ଏହି ହାର୍ଡୱେର (କିମ୍ବା ସେଗୁଡ଼ିକର ଗୋଟିଏ ସମଷ୍ଟି) Red Hat ଦ୍ୱାରା ସମର୍ଥିତ ନୁହଁ।  ସମର୍ଥିତ ହାର୍ଡୱେର "
+-"ବିଷୟରେ ଅଧିକ ସୂଚନା ପାଇଁ, ଦୟାକରି http://www.redhat.com/hardware କୁ ଦେଖନ୍ତୁ।"
++"ବିଷୟରେ ଅଧିକ ସୂଚନା ପାଇଁ, ଦୟାକରି http://www.centos.org/hardware କୁ ଦେଖନ୍ତୁ।"
+ 
+ #: loader/loader.c:1348
+ msgid "Media Detected"
+diff -uNr anaconda-13.21.195__orig/po/pa.po anaconda-13.21.195/po/pa.po
+--- anaconda-13.21.195__orig/po/pa.po	2013-01-23 01:22:25.000000000 +0000
++++ anaconda-13.21.195/po/pa.po	2013-03-01 23:22:11.509118207 +0000
+@@ -4275,12 +4275,12 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ "ਇਹ ਹਾਰਡਵੇਅਰ (ਜਾਂ ਇਹਨਾਂ ਦਾ ਇੱਕ ਕੰਬੀਨੇਸ਼ਨ) Red Hat ਦੁਆਰਾ ਸਹਿਯੋਗੀ ਨਹੀਂ ਹੈ। ਸਹਿਯੋਗੀ ਹਾਰਡਵੇਅਰ "
+-"ਬਾਰੇ ਵਧੇਰੇ ਜਾਣਕਾਰੀ ਲਈ, ਕਿਰਪਾ ਕਰਕੇ http://www.redhat.com/hardware ਵੇਖੋ।"
++"ਬਾਰੇ ਵਧੇਰੇ ਜਾਣਕਾਰੀ ਲਈ, ਕਿਰਪਾ ਕਰਕੇ http://www.centos.org/hardware ਵੇਖੋ।"
+ 
+ #: loader/loader.c:1348
+ msgid "Media Detected"
+diff -uNr anaconda-13.21.195__orig/po/pl.po anaconda-13.21.195/po/pl.po
+--- anaconda-13.21.195__orig/po/pl.po	2013-01-23 01:22:25.000000000 +0000
++++ anaconda-13.21.195/po/pl.po	2013-03-01 23:22:11.558118137 +0000
+@@ -4445,13 +4445,13 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ "Ten sprzęt (lub jego kombinacja) nie jest obsługiwany przez firmę Red Hat. "
+ "Aby dowiedzieć się więcej o obsługiwanym sprzęcie, należy zobaczyć stronę "
+-"http://www.redhat.com/hardware."
++"http://www.centos.org/hardware."
+ 
+ #: loader/loader.c:1348
+ msgid "Media Detected"
+diff -uNr anaconda-13.21.195__orig/po/pt_BR.po anaconda-13.21.195/po/pt_BR.po
+--- anaconda-13.21.195__orig/po/pt_BR.po	2013-01-23 01:22:26.000000000 +0000
++++ anaconda-13.21.195/po/pt_BR.po	2013-03-01 23:22:11.608118067 +0000
+@@ -4463,13 +4463,13 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ "Este hardware (ou a combinação de tal) não é suportado pela Red Hat.  Para "
+ "mais informações sobre hardware suportado, por favor refira ao http://www."
+-"redhat.com/hardware."
++"centos.org/hardware."
+ 
+ #: loader/loader.c:1348
+ msgid "Media Detected"
+diff -uNr anaconda-13.21.195__orig/po/pt.po anaconda-13.21.195/po/pt.po
+--- anaconda-13.21.195__orig/po/pt.po	2013-01-23 01:22:26.000000000 +0000
++++ anaconda-13.21.195/po/pt.po	2013-03-01 23:22:11.655118000 +0000
+@@ -4222,9 +4222,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/ro.po anaconda-13.21.195/po/ro.po
+--- anaconda-13.21.195__orig/po/ro.po	2013-01-23 01:22:26.000000000 +0000
++++ anaconda-13.21.195/po/ro.po	2013-03-01 23:22:11.699117938 +0000
+@@ -4059,9 +4059,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/ru.po anaconda-13.21.195/po/ru.po
+--- anaconda-13.21.195__orig/po/ru.po	2013-01-23 01:22:26.000000000 +0000
++++ anaconda-13.21.195/po/ru.po	2013-03-01 23:22:11.748117868 +0000
+@@ -4404,13 +4404,13 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ "Это оборудование (и его различные сочетания) не поддерживается Red Hat. За "
+-"информацией о поддерживаемом оборудовании обращайтесь на http://www.redhat."
+-"com/hardware."
++"информацией о поддерживаемом оборудовании обращайтесь на http://www.centos."
++"org/hardware."
+ 
+ #: loader/loader.c:1348
+ msgid "Media Detected"
+diff -uNr anaconda-13.21.195__orig/po/si.po anaconda-13.21.195/po/si.po
+--- anaconda-13.21.195__orig/po/si.po	2013-01-23 01:22:26.000000000 +0000
++++ anaconda-13.21.195/po/si.po	2013-03-01 23:22:11.793117805 +0000
+@@ -3942,9 +3942,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/sk.po anaconda-13.21.195/po/sk.po
+--- anaconda-13.21.195__orig/po/sk.po	2013-01-23 01:22:26.000000000 +0000
++++ anaconda-13.21.195/po/sk.po	2013-03-01 23:22:11.839117740 +0000
+@@ -4196,9 +4196,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/sl.po anaconda-13.21.195/po/sl.po
+--- anaconda-13.21.195__orig/po/sl.po	2013-01-23 01:22:26.000000000 +0000
++++ anaconda-13.21.195/po/sl.po	2013-03-01 23:22:11.884117676 +0000
+@@ -4059,9 +4059,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/sq.po anaconda-13.21.195/po/sq.po
+--- anaconda-13.21.195__orig/po/sq.po	2013-01-23 01:22:26.000000000 +0000
++++ anaconda-13.21.195/po/sq.po	2013-03-01 23:22:11.929117612 +0000
+@@ -4139,9 +4139,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/sr@latin.po anaconda-13.21.195/po/sr@latin.po
+--- anaconda-13.21.195__orig/po/sr@latin.po	2013-01-23 01:22:26.000000000 +0000
++++ anaconda-13.21.195/po/sr@latin.po	2013-03-01 23:22:11.976117546 +0000
+@@ -4192,9 +4192,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/sr.po anaconda-13.21.195/po/sr.po
+--- anaconda-13.21.195__orig/po/sr.po	2013-01-23 01:22:26.000000000 +0000
++++ anaconda-13.21.195/po/sr.po	2013-03-01 23:22:12.022117481 +0000
+@@ -4187,9 +4187,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/sv.po anaconda-13.21.195/po/sv.po
+--- anaconda-13.21.195__orig/po/sv.po	2013-01-23 01:22:26.000000000 +0000
++++ anaconda-13.21.195/po/sv.po	2013-03-01 23:22:12.071117411 +0000
+@@ -4390,9 +4390,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/ta.po anaconda-13.21.195/po/ta.po
+--- anaconda-13.21.195__orig/po/ta.po	2013-01-23 01:22:26.000000000 +0000
++++ anaconda-13.21.195/po/ta.po	2013-03-01 23:22:12.120117342 +0000
+@@ -4330,12 +4330,12 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ "இந்த வன்பொருளை (அல்லது அவற்றின் தொகுப்பை) Red Hat ஆதரிக்காது.  ஆதரிக்கப்படும் வன்பொருள் "
+-"பற்றி மேலும் தகவலறிய http://www.redhat.com/hardware க்குச் சென்று பார்க்கவும்."
++"பற்றி மேலும் தகவலறிய http://www.centos.org/hardware க்குச் சென்று பார்க்கவும்."
+ 
+ #: loader/loader.c:1348
+ msgid "Media Detected"
+diff -uNr anaconda-13.21.195__orig/po/te.po anaconda-13.21.195/po/te.po
+--- anaconda-13.21.195__orig/po/te.po	2013-01-23 01:22:26.000000000 +0000
++++ anaconda-13.21.195/po/te.po	2013-03-01 23:22:12.168117274 +0000
+@@ -4273,12 +4273,12 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ "ఈ హార్డువేర్ (లేదా ఆ సమ్మేళనం) Red Hat చేత తోడ్పాటునీయబడుట లేదు. తోడ్పాటు నిచ్చు హార్డువేర్‌పై మరింత "
+-"సమాచారం కొరకు, దయచేసి http://www.redhat.com/hardware చూడండి."
++"సమాచారం కొరకు, దయచేసి http://www.centos.org/hardware చూడండి."
+ 
+ #: loader/loader.c:1348
+ msgid "Media Detected"
+diff -uNr anaconda-13.21.195__orig/po/tg.po anaconda-13.21.195/po/tg.po
+--- anaconda-13.21.195__orig/po/tg.po	2013-01-23 01:22:26.000000000 +0000
++++ anaconda-13.21.195/po/tg.po	2013-03-01 23:22:12.211117213 +0000
+@@ -3826,9 +3826,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/th.po anaconda-13.21.195/po/th.po
+--- anaconda-13.21.195__orig/po/th.po	2013-01-23 01:22:26.000000000 +0000
++++ anaconda-13.21.195/po/th.po	2013-03-01 23:22:12.256117150 +0000
+@@ -4047,9 +4047,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/tr.po anaconda-13.21.195/po/tr.po
+--- anaconda-13.21.195__orig/po/tr.po	2013-01-23 01:22:26.000000000 +0000
++++ anaconda-13.21.195/po/tr.po	2013-03-01 23:22:12.300117087 +0000
+@@ -3953,9 +3953,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/uk.po anaconda-13.21.195/po/uk.po
+--- anaconda-13.21.195__orig/po/uk.po	2013-01-23 01:22:26.000000000 +0000
++++ anaconda-13.21.195/po/uk.po	2013-03-01 23:22:12.349117018 +0000
+@@ -4328,9 +4328,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/ur.po anaconda-13.21.195/po/ur.po
+--- anaconda-13.21.195__orig/po/ur.po	2013-01-23 01:22:26.000000000 +0000
++++ anaconda-13.21.195/po/ur.po	2013-03-01 23:22:12.392116957 +0000
+@@ -3951,9 +3951,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/vi.po anaconda-13.21.195/po/vi.po
+--- anaconda-13.21.195__orig/po/vi.po	2013-01-23 01:22:26.000000000 +0000
++++ anaconda-13.21.195/po/vi.po	2013-03-01 23:22:12.436116895 +0000
+@@ -3900,9 +3900,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348
+diff -uNr anaconda-13.21.195__orig/po/zh_CN.po anaconda-13.21.195/po/zh_CN.po
+--- anaconda-13.21.195__orig/po/zh_CN.po	2013-01-23 01:22:26.000000000 +0000
++++ anaconda-13.21.195/po/zh_CN.po	2013-03-01 23:22:12.482116830 +0000
+@@ -4161,12 +4161,12 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+-"红帽还不支持这个硬件 (或其组合)。有关支持的硬件信息请参考 http://www.redhat."
+-"com/hardware’"
++"红帽还不支持这个硬件 (或其组合)。有关支持的硬件信息请参考 http://www.centos."
++"org/hardware’"
+ 
+ #: loader/loader.c:1348
+ msgid "Media Detected"
+diff -uNr anaconda-13.21.195__orig/po/zh_TW.po anaconda-13.21.195/po/zh_TW.po
+--- anaconda-13.21.195__orig/po/zh_TW.po	2013-01-23 01:22:27.000000000 +0000
++++ anaconda-13.21.195/po/zh_TW.po	2013-03-01 23:22:12.529116763 +0000
+@@ -4191,12 +4191,12 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ "Red Hat 不支援此硬體（或其組合）。 欲取得更多有關於受支援硬體上的相關資訊，請"
+-"參閱〈http://www.redhat.com/hardware〉。"
++"參閱〈http://www.centos.org/hardware〉。"
+ 
+ #: loader/loader.c:1348
+ msgid "Media Detected"
+diff -uNr anaconda-13.21.195__orig/po/zu.po anaconda-13.21.195/po/zu.po
+--- anaconda-13.21.195__orig/po/zu.po	2013-01-23 01:22:27.000000000 +0000
++++ anaconda-13.21.195/po/zu.po	2013-03-01 23:22:12.573116701 +0000
+@@ -3940,9 +3940,9 @@
+ 
+ #: loader/loader.c:1282
+ msgid ""
+-"This hardware (or a combination thereof) is not supported by Red Hat.  For "
+-"more information on supported hardware, please refer to http://www.redhat."
+-"com/hardware."
++"This hardware (or a combination thereof) is not supported by CentOS.  For "
++"more information on supported hardware, please refer to http://www.centos."
++"org/hardware."
+ msgstr ""
+ 
+ #: loader/loader.c:1348

@@ -1,0 +1,105 @@
+diff -uNr anaconda-13.21.195__orig/installclasses/rhel.py anaconda-13.21.195/installclasses/rhel.py
+--- anaconda-13.21.195__orig/installclasses/rhel.py	2012-11-26 20:42:02.000000000 +0000
++++ anaconda-13.21.195/installclasses/rhel.py	2013-03-01 23:02:13.665813204 +0000
+@@ -29,20 +29,78 @@
+ 
+ class InstallClass(BaseInstallClass):
+     # name has underscore used for mnemonics, strip if you dont need it
+-    id = "rhel"
+-    name = N_("Red Hat Enterprise Linux")
++    id = "centos"
++    name = N_("CentOS Linux")
+     _description = N_("The default installation of %s is a minimum install. "
+                      "You can optionally select a different set of software "
+                      "now.")
+     _descriptionFields = (productName,)
+-    sortPriority = 10000
+-    hidden = 1
++    sortPriority = 10005
++    hidden = 0
+ 
+     bootloaderTimeoutDefault = 5
+     bootloaderExtraArgs = ["crashkernel=auto"]
+ 
+-    tasks = [(N_("Minimal"),
+-              ["core"])]
++    tasks = [(N_("Desktop"),
++              ["base", "core", "debugging",
++               "directory-client", "java-platform", "network-file-system-client",
++               "server-platform",
++               "fonts", "print-client",
++               "basic-desktop", "desktop-debugging", "desktop-platform",
++               "general-desktop", "graphical-admin-tools", "input-methods",
++               "legacy-x", "x11", "internet-applications", "internet-browser", "office-suite",
++               "remote-desktop-clients"]),
++              (N_("Minimal Desktop"),
++              ["base", "core", "debugging",
++               "directory-client", "java-platform", "network-file-system-client",
++               "server-platform",
++               "fonts", "print-client",
++               "basic-desktop", "desktop-debugging", "desktop-platform",
++               "input-methods",
++               "legacy-x", "x11", "internet-browser",
++               "remote-desktop-clients"]),
++             (N_("Minimal"),
++              ["core"]),
++             (N_("Basic Server"),
++              ["base", "console-internet", "core", "debugging",
++               "directory-client", "hardware-monitoring", "java-platform", 
++               "large-systems", "network-file-system-client",
++               "performance", "perl-runtime", "server-platform"]),
++             (N_("Database Server"),
++              ["base", "console-internet", "core", "debugging",
++               "directory-client", "hardware-monitoring", "java-platform", 
++               "large-systems", "network-file-system-client",
++               "performance", "perl-runtime", "server-platform",
++               "mysql-client", "mysql", "postgresql-client", "postgresql",
++               "system-admin-tools"]),
++             (N_("Web Server"),
++              ["base", "console-internet", "core", "debugging",
++               "directory-client", "java-platform", 
++               "network-file-system-client",
++               "performance", "perl-runtime", "server-platform",
++               "web-server", "web-servlet", "php", "turbogears",
++               "mysql-client", "postgresql-client"]),
++             (N_("Virtual Host"),
++              ["base", "console-internet", "core", "debugging",
++               "directory-client", "hardware-monitoring", "java-platform", 
++               "large-systems", "network-file-system-client",
++               "performance", "perl-runtime", "server-platform",
++               "virtualization", "virtualization-client",
++               "virtualization-platform"]),
++             (N_("Software Development Workstation"),
++              ["base", "core", "debugging",
++               "directory-client", "java-platform", "network-file-system-client",
++               "performance", "perl-runtime", "server-platform",
++               "fonts", "print-client",
++               "basic-desktop", "desktop-debugging", "desktop-platform",
++               "general-desktop", "graphical-admin-tools", "input-methods",
++               "legacy-x", "x11", "internet-browser", "graphics", "emacs", "tex",
++               "remote-desktop-clients", "virtualization", "virtualization-client",
++               "virtualization-platform",
++               "desktop-platform-devel", "development", "eclipse",
++               "server-platform-devel", "technical-writing",
++               "additional-devel"])]
++ 
+ 
+     def getPackagePaths(self, uri):
+         if not type(uri) == types.ListType:
+@@ -59,6 +117,7 @@
+     def setSteps(self, anaconda):
+         BaseInstallClass.setSteps(self, anaconda)
+         anaconda.dispatch.skipStep("partition")
++        anaconda.dispatch.skipStep("betanag",permanent=1)
+ 
+     def getBackend(self):
+         if flags.livecdInstall:
+@@ -75,6 +134,7 @@
+             return True
+ 
+         productUpgrades = {
++            "CentOS": ("CentOS release", ),
+             "Red Hat Enterprise Linux AS": ("Red Hat Linux Advanced Server", ),
+             "Red Hat Enterprise Linux WS": ("Red Hat Linux Advanced Workstation",),
+             # FIXME: this probably shouldn't be in a release...
+Binary files anaconda-13.21.195__orig/installclasses/.rhel.py.swp and anaconda-13.21.195/installclasses/.rhel.py.swp differ
