@@ -24,7 +24,9 @@ import gettext
 _ = lambda x: gettext.ldgettext("anaconda", x)
 N_ = lambda x: x
 
-SELINUX_DEFAULT = 1
+# Disabled in Abiquo by default
+#SELINUX_DEFAULT = 1
+SELINUX_DEFAULT = 0
 
 DISPATCH_BACK = -1
 DISPATCH_FORWARD = 1
