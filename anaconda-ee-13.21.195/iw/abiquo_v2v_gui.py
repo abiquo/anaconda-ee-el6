@@ -30,21 +30,21 @@ class AbiquoV2VWindow(InstallWindow):
         nfs_repo_selected = ('abiquo-nfs-repository' in self.anaconda.id.abiquo.selectedGroups)
 
         if re.search('(localhost|127\.0\.0\.1)', nfsUrl) and not nfs_repo_selected:
-            self.intf.messageWindow(_("<b>NFS Repository Error</b>"),
-                       _("<b>127.0.0.1 or localhost detected</b>\n\n"
+            self.intf.messageWindow("<b>NFS Repository Error</b>",
+                         "<b>127.0.0.1 or localhost detected</b>\n\n"
                          "127.0.0.1 or localhost values are not allowed here. "
                          "Use an IP address reachable by other hosts "
-                         "in your LAN."),
+                         "in your LAN.",
                             type="warning")
             raise gui.StayOnScreen
 
         serverIP = self.xml.get_widget('abiquo_server_ip').get_text()
         if re.search('(localhost|127\.0\.0\.1)', serverIP):
-            self.intf.messageWindow(_("<b>Abiquo Server IP Error</b>"),
-                       _("<b>127.0.0.1 or localhost detected</b>\n\n"
+            self.intf.messageWindow("<b>Abiquo Server IP Error</b>",
+                         "<b>127.0.0.1 or localhost detected</b>\n\n"
                          "127.0.0.1 or localhost values are not allowed here. "
                          "Use an IP address reachable by other hosts "
-                         "in your LAN."),
+                         "in your LAN.",
                                 type="warning")
             raise gui.StayOnScreen
 
@@ -55,8 +55,8 @@ class AbiquoV2VWindow(InstallWindow):
                 network.sanityCheckIPString(host)
             except:
                 if network.sanityCheckHostname(host) is not None:
-                    self.intf.messageWindow(_("<b>Invalid NFS URL</b>"),
-                       _("NFS Repository URL is invalid."),
+                    self.intf.messageWindow("<b>Invalid NFS URL</b>",
+                         "NFS Repository URL is invalid.",
                             type="warning")
                     raise gui.StayOnScreen
 
@@ -64,15 +64,15 @@ class AbiquoV2VWindow(InstallWindow):
         try:
             socket.inet_aton(serverIP.strip())
         except socket.error:
-            self.intf.messageWindow(_("<b>Abiquo Server IP Error</b>"),
-                       _("Invalid Abiquo Server IP address"),
+            self.intf.messageWindow("<b>Abiquo Server IP Error</b>",
+                         "Invalid Abiquo Server IP address",
                                 type="warning")
             raise gui.StayOnScreen
 
         if not re.search('.+:\/.*', nfsUrl):
-            self.intf.messageWindow(_("<b>NFS Repository Error</b>"),
-                       _("<b>Invalid NFS URL</b>\n\n"
-                         "%s is not a valid NFS URL" % nfsUrl),
+            self.intf.messageWindow("<b>NFS Repository Error</b>",
+                         "<b>Invalid NFS URL</b>\n\n"
+                         "%s is not a valid NFS URL" % nfsUrl,
                                 type="warning")
             raise gui.StayOnScreen
 
@@ -103,7 +103,7 @@ class AbiquoV2VWindow(InstallWindow):
         if not ('abiquo-nfs-repository' in self.anaconda.id.abiquo.selectedGroups):
             msg = nfs_help + msg
         
-        self.intf.messageWindow(_("<b>V2V Services Settings</b>"), msg, type="ok")
+        self.intf.messageWindow("<b>V2V Services Settings</b>", msg, type="ok")
 
     def getScreen (self, anaconda):
         self.intf = anaconda.intf

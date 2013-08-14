@@ -17,7 +17,6 @@ import re
 import string
 import gui
 from iw_gui import *
-#from rhpl.translate import _, N_
 from flags import flags
 import md5
 

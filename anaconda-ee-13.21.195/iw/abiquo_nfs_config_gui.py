@@ -13,9 +13,6 @@ import gtk.glade
 import gobject
 import gui
 from iw_gui import *
-from constants import *
-from product import *
-from flags import flags
 #from rhpl.translate import _, N_
 import re
 import socket
@@ -30,11 +27,11 @@ class AbiquoNFSConfigWindow(InstallWindow):
         nfsUrl = self.xml.get_widget('abiquo_nfs_repository').get_text()
 
         if re.search('(localhost|127\.0\.0\.1)', nfsUrl):
-            self.intf.messageWindow(_("<b>NFS Repository Error</b>"),
-                       _("<b>127.0.0.1 or localhost detected</b>\n\n"
+            self.intf.messageWindow("<b>NFS Repository Error</b>",
+                       "<b>127.0.0.1 or localhost detected</b>\n\n"
                          "127.0.0.1 or localhost values are not allowed here. "
                          "Use an IP address reachable by other hosts "
-                         "in your LAN."),
+                         "in your LAN.",
                             type="warning")
             raise gui.StayOnScreen
 
@@ -44,15 +41,15 @@ class AbiquoNFSConfigWindow(InstallWindow):
             network.sanityCheckIPString(host)
         except:
             if network.sanityCheckHostname(host) is not None:
-                self.intf.messageWindow(_("<b>Invalid NFS URL</b>"),
-                           _("NFS Repository URL is invalid."),
+                self.intf.messageWindow("<b>Invalid NFS URL</b>",
+                           "NFS Repository URL is invalid.",
                                     type="warning")
                 raise gui.StayOnScreen
 
         if not re.search('.+:\/.*', nfsUrl):
-            self.intf.messageWindow(_("<b>NFS Repository Error</b>"),
-                       _("<b>Invalid NFS URL</b>\n\n"
-                         "%s is not a valid NFS URL" % nfsUrl),
+            self.intf.messageWindow("<b>NFS Repository Error</b>",
+                         "<b>Invalid NFS URL</b>\n\n"
+                         "%s is not a valid NFS URL" % nfsUrl,
                                 type="warning")
             raise gui.StayOnScreen
 
@@ -67,7 +64,7 @@ class AbiquoNFSConfigWindow(InstallWindow):
         "my-nfs-server-ip:/opt/vm_repository\n"
         "\n"
         )
-        self.intf.messageWindow(_("<b>NFS Configuration</b>"), msg, type="ok")
+        self.intf.messageWindow("<b>NFS Configuration</b>", msg, type="ok")
 
     def getScreen (self, anaconda):
         self.intf = anaconda.intf

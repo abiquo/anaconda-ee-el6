@@ -13,7 +13,6 @@ import gtk.glade
 import gobject
 import gui
 from iw_gui import *
-#from rhpl.translate import _, N_
 from constants import productName
 
 # from netconfig_dialog import NetworkConfigurator

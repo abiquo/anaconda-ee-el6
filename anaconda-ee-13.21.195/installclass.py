@@ -79,11 +79,11 @@ class BaseInstallClass(object):
 
     def postAction(self, anaconda):
         anaconda.backend.postAction(anaconda)
+	#abiquoPostInstall(anaconda)
 
     def setSteps(self, anaconda):
         dispatch = anaconda.dispatch
 	dispatch.setStepList(
-		 "language",
 		 "keyboard",
 		 "welcome",
                  "filtertype",
