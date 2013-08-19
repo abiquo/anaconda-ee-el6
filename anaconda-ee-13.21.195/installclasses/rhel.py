@@ -70,9 +70,6 @@ class InstallClass(BaseInstallClass):
         BaseInstallClass.setSteps(self, anaconda)
         anaconda.dispatch.skipStep("partition")
 
-    def postAction(self, anaconda):
-        abiquoPostInstall(anaconda)
-
     def getBackend(self):
         if flags.livecdInstall:
             import livecd

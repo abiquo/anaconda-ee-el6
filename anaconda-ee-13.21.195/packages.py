@@ -38,6 +38,8 @@ from product import *
 from constants import *
 from upgrade import bindMountDevDirectory
 from storage.errors import *
+from abiquo_postinstall import *
+
 
 import logging
 log = logging.getLogger("anaconda")
@@ -46,7 +48,7 @@ import gettext
 _ = lambda x: gettext.ldgettext("anaconda", x)
 
 def doPostAction(anaconda):
-    anaconda.id.instClass.postAction(anaconda)
+    abiquoPostInstall(anaconda)
 
 def firstbootConfiguration(anaconda):
     if anaconda.id.firstboot == FIRSTBOOT_RECONFIG:

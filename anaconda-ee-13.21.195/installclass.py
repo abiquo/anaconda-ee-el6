@@ -138,13 +138,10 @@ class BaseInstallClass(object):
             dispatch.skipStep("bootloader", permanent=1)
 
         # allow backends to disable interactive package selection
-        #if not anaconda.backend.supportsPackageSelection:
-        #    dispatch.skipStep("tasksel", skip = 1, permanent=1)
-        #    dispatch.skipStep("group-selection", skip = 1, permanent=1)
+        if not anaconda.backend.supportsPackageSelection:
+            dispatch.skipStep("tasksel", skip = 1, permanent=1)
+            dispatch.skipStep("group-selection", skip = 1, permanent=1)
 	
-        # Abiquo: Don't skip tasksel step
-        dispatch.skipStep("tasksel", skip = 0)
-
         # allow install classes to turn off the upgrade 
         if not self.showUpgrade or not anaconda.backend.supportsUpgrades:
             dispatch.skipStep("findrootparts", skip = 1)

@@ -82,8 +82,8 @@ def execWithRedirect(command, argv, stdin = None, stdout = None,
     def chroot ():
         os.chroot(root)
 
-    if command.startswith('/'):
-        log.warning("'%s' specified as full path" % (command,))
+    # if command.startswith('/'):
+    #     log.warning("'%s' specified as full path" % (command,))
 
     stdinclose = stdoutclose = stderrclose = lambda : None
 

@@ -18,7 +18,7 @@ import string
 import gui
 from iw_gui import *
 from flags import flags
-import md5
+import hashlib
 
 class AbiquoPasswordWindow (InstallWindow):
 
@@ -69,7 +69,7 @@ class AbiquoPasswordWindow (InstallWindow):
                 passwordError()
 
 	passwd = self.pw.get_text()
-	m = md5.md5()
+	m = hashlib.md5()
 	m.update(passwd)
         self.idata.abiquoPasswordHex = m.hexdigest()
 	self.idata.abiquoPassword = passwd

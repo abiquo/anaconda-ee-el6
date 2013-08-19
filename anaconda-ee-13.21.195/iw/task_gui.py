@@ -65,6 +65,7 @@ class AbiquoAdditionalTasks(gtk.TreeView):
         self.store.append([('abiquo-nfs-repository' in self.anaconda.id.abiquo.selectedGroups), "Abiquo NFS Repository", 'abiquo-nfs-repository'])
         self.set_model(self.store)
 
+        # for g in ['abiquo-nfs-repository', 'abiquo-remote-repository', 'abiquo-dhcp-relay']:
         for g in ['abiquo-nfs-repository', 'abiquo-remote-repository', 'abiquo-dhcp-relay']:
             if (g in self.anaconda.id.abiquo.selectedGroups):
                 self.selected_tasks.append(g)
@@ -113,10 +114,12 @@ class AbiquoPlatformTasks(gtk.TreeView):
         for g in ['abiquo-server', 'abiquo-remote-services', 'abiquo-v2v', 'abiquo-monolithic']:
             if g in self.anaconda.id.abiquo.selectedGroups:
                 sel = False
-        self.store.append([sel, "None", 'none'])
+        # Not needed.
+        # self.store.append([sel, "None", 'none'])
 
         # check if monolithic previously selected
-        self.store.append([('abiquo-monolithic' in self.anaconda.id.abiquo.selectedGroups), "Monolithic Install", 'abiquo-monolithic'])
+        # self.store.append([('abiquo-monolithic' in self.anaconda.id.abiquo.selectedGroups), "Monolithic Install", 'abiquo-monolithic'])
+        self.store.append([sel, "Monolithic Install", 'abiquo-monolithic'])
 
         # check if distributed previously selected
         sel = False
@@ -153,7 +156,7 @@ class AbiquoStorageTasks(AbiquoPlatformTasks):
     
     def _setupStore(self):
         self.store = gtk.ListStore(gobject.TYPE_BOOLEAN, gobject.TYPE_STRING, gobject.TYPE_STRING)
-        self.store.append([('abiquo-lvm-storage-server' not in self.anaconda.id.abiquo.selectedGroups), "None", 'none'])
+        # self.store.append([('abiquo-lvm-storage-server' not in self.anaconda.id.abiquo.selectedGroups), "None", 'none'])
         self.store.append([('abiquo-lvm-storage-server' in self.anaconda.id.abiquo.selectedGroups), "Abiquo LVM Server", 'abiquo-lvm-storage-server'])
         self.set_model(self.store)
 
@@ -166,9 +169,11 @@ class TaskWindow(InstallWindow):
 
         for g in self.abiquo_groups:
             if g in self.anaconda.id.abiquo.selectedGroups:
-                map(self.backend.selectGroup, [g])
+                map(lambda x: self.backend.selectGroup(x), [g])
+                #map(self.backend.selectGroup, [g])
             else:
-                map(self.backend.deselectGroup, [g])
+                map(lambda x: self.backend.deselectGroup(x), [g])
+                #map(self.backend.deselectGroup, [g])
 
         for g in ['abiquo-remote-services', 'abiquo-monolithic']:
             if g not in self.anaconda.id.abiquo.selectedGroups:
@@ -263,7 +268,6 @@ class TaskWindow(InstallWindow):
         self.abiquo_groups = ['abiquo-monolithic',
                   'abiquo-server', 'abiquo-remote-services', 'abiquo-v2v',
                   'abiquo-lvm-storage-server',
-                  'opschef-server','opschef-client',
                   'abiquo-dhcp-relay', 'abiquo-nfs-repository',
                   'abiquo-remote-repository'
                   ]
