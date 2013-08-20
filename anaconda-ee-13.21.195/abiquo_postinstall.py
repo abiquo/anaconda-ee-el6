@@ -92,6 +92,7 @@ exit 0
 
     if (anaconda.backend.isGroupSelected('abiquo-v2v') or \
             anaconda.backend.isGroupSelected('abiquo-monolithic') or \
+            anaconda.backend.isGroupSelected('abiquo-kvm') or \
             anaconda.backend.isGroupSelected('abiquo-remote-services')) and \
             not anaconda.backend.isGroupSelected('abiquo-nfs-repository'):
                 f = open(anaconda.rootPath + "/etc/fstab", "a")

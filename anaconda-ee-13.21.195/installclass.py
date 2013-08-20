@@ -110,6 +110,7 @@ class BaseInstallClass(object):
                  "abiquo_password",
                  "abiquo_nfs_config",
                  "abiquo_rs",
+                 "abiquo_hv",
                  "abiquo_dhcp_relay",
 		 "confirminstall",
                  "reipl",

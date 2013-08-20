@@ -44,6 +44,7 @@ class InstallClass(BaseInstallClass):
     tasks =  [
               (N_("LVM Storage Server"), ["abiquo-lvm-storage-server"]),
               (N_("Abiquo Server"), ["abiquo-server"]),
+              (N_("Abiquo KVM"), ["abiquo-kvm"]),
               (N_("Abiquo V2V Conversion Services"), ["abiquo-v2v"]),
               (N_("Abiquo Remote Services"), ["abiquo-remote-services"]),
               (N_("Abiquo NFS Repository"), ["abiquo-nfs-repository"]),
