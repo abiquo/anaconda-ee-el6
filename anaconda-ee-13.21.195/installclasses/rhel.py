@@ -26,7 +26,7 @@ import types
 
 import installmethod
 import yuminstall
-from abiquo_postinstall_26 import *
+#from abiquo_postinstall_26 import *
 
 
 class InstallClass(BaseInstallClass):

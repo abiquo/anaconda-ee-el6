@@ -1251,7 +1251,7 @@ class AnacondaKSHandler(superclass):
         self.anaconda = anaconda
         self.id = self.anaconda.id
         self.onPart = {}
-        self.skipSteps.extend(["abiquo", "abiquo_rs", "abiquo_dhcp_relay"])
+        self.skipSteps.extend(["abiquo", "abiquo_rs", "abiquo_hv", "abiquo_dhcp_relay"])
 
 
         # All the KickstartCommand and KickstartData objects that

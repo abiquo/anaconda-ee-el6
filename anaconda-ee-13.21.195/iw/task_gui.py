@@ -259,7 +259,7 @@ class TaskWindow(InstallWindow):
         if selection == "Abiquo Platform":
             w.add(self.abiquo_platform_tasks)
             self.abiquo_platform_tasks.show()
-        elif selection == "Cloud Nodes":
+        elif selection == "Cloud Node":
             w.add(self.abiquo_hypervisor_tasks)
             self.abiquo_hypervisor_tasks.show()
         elif selection == "Storage Servers":
@@ -308,16 +308,17 @@ class TaskWindow(InstallWindow):
 
         lbl = self.xml.get_widget("mainLabel")
 
-        self.installer_tasks = ["Abiquo Platform", "Cloud Nodes", "Storage Servers", "Additional Components"]
+        self.installer_tasks = ["Abiquo Platform", "Cloud Node", "Storage Servers", "Additional Components"]
         self.tasks_descriptions = {
             "Abiquo Platform": DESC_ABI_PLATFORM,
-            "Cloud Nodes": "<b>Cloud Node</b>\nInstall Abiquo KVM (OpenSource hypervisor tested and supported by Abiquo).",
+            "Cloud Node": "<b>Cloud Node</b>\nInstall Abiquo KVM (OpenSource hypervisor tested and supported by Abiquo).",
             "Storage Servers": "<b>Storage Servers</b>\nInstall required servers to manage external storage.",
             "Additional Components": "<b>Additional Components</b>\nNFS Repository, etc.",
         }
 
         self._createTaskStore()
         self.abiquo_platform_tasks = AbiquoPlatformTasks(anaconda)
+        self.abiquo_hypervisor_tasks = AbiquoHypervisorTasks(anaconda)
         self.abiquo_storage_tasks = AbiquoStorageTasks(anaconda)
         self.abiquo_additional_tasks = AbiquoAdditionalTasks(anaconda)
         w = self.xml.get_widget("subtaskSW")

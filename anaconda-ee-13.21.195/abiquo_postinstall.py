@@ -100,7 +100,15 @@ exit 0
                             anaconda.id.abiquo_rs.abiquo_nfs_repository )
                 f.close()
     
+    # KVM
+    if anaconda.backend.isGroupSelected('abiquo-kvm'):
+        f = fileinput.FileInput(anaconda.rootPath + "/etc/abiquo-aim.ini",inplace=1)
+        for line in f:
+            line = line.replace("redisHost = 127.0.0.1","redisHost = %s" % anaconda.id.abiquo.abiquo_rs_ip)
+            print line.rstrip()
+        f.close()        
 
+    # DHCP Relay
     if anaconda.backend.isGroupSelected('abiquo-dhcp-relay'):
         vrange1 = anaconda.id.abiquo.abiquo_dhcprelay_vrange_1
         vrange2 = anaconda.id.abiquo.abiquo_dhcprelay_vrange_2

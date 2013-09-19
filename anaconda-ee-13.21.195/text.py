@@ -63,6 +63,7 @@ stepToClasses = {
     #"abiquo": ("abiquo_server_text", "AbiquoServerWindow"),
     "abiquo_rs": ("abiquo_rs_text", "AbiquoRSWindow"),
     "abiquo_v2v": ("abiquo_v2v_text", "AbiquoV2VWindow"),
+    "abiquo_hv": ("abiquo_hv_text", "AbiquoHVWindow"),
     "install" : ("progress_text", "setupForInstall"),
     "complete" : ("complete_text", "FinishedWindow"),
 }
