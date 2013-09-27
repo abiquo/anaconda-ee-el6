@@ -115,8 +115,8 @@ class AbiquoPlatformTasks(gtk.TreeView):
         for g in ['abiquo-server', 'abiquo-remote-services', 'abiquo-v2v', 'abiquo-monolithic']:
             if g in self.anaconda.id.abiquo.selectedGroups:
                 sel = False
-        # Not needed.
-        # self.store.append([sel, "None", 'none'])
+        
+        self.store.append([sel, "None", 'none'])
 
         # check if monolithic previously selected
         # self.store.append([('abiquo-monolithic' in self.anaconda.id.abiquo.selectedGroups), "Monolithic Install", 'abiquo-monolithic'])
@@ -162,6 +162,7 @@ class AbiquoHypervisorTasks(AbiquoPlatformTasks):
          for g in ['abiquo-kvm']:
              if g in self.anaconda.id.abiquo.selectedGroups:
                 sel = False
+         self.store.append([sel, "None", 'none'])
          self.store.append([('abiquo-kvm' in self.anaconda.id.abiquo.selectedGroups), "KVM Cloud Node", 'abiquo-kvm'])
          # self.store.append([('abiquo-xen' in self.anaconda.id.abiquo.selectedGroups), "Xen Cloud Node", 'abiquo-xen'])
          # self.store.append([('abiquo-virtualbox' in self.anaconda.id.abiquo.selectedGroups), "VirtualBox Cloud Node", 'abiquo-virtualbox'])
@@ -182,16 +183,20 @@ class TaskWindow(InstallWindow):
 
     def getNext(self):
         log.info('Finished group selection: %s' % self.anaconda.id.abiquo.selectedGroups)
-        
+        log.info('Backend selection: %s' % self.anaconda.id.abiquo.selectedGroups)
+
         self.dispatch.skipStep("abiquo_password", skip = 1)
 
         for g in self.abiquo_groups:
             if g in self.anaconda.id.abiquo.selectedGroups:
+                #map(lambda x: self.backend.ayum.selectGroup(x), [g])
+                log.info("Selecting group: %s " % g)
                 map(lambda x: self.backend.selectGroup(x), [g])
-                #map(self.backend.selectGroup, [g])
             else:
+                log.info("Deselecting group: %s " % g)
                 map(lambda x: self.backend.deselectGroup(x), [g])
-                #map(self.backend.deselectGroup, [g])
+     
+
 
         for g in ['abiquo-remote-services', 'abiquo-monolithic']:
             if g not in self.anaconda.id.abiquo.selectedGroups:

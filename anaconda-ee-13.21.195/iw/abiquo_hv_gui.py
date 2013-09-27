@@ -15,7 +15,6 @@ import gui
 from iw_gui import *
 from constants import productName
 
-from netconfig_dialog import NetworkConfigurator
 import network
 
 from yuminstall import AnacondaYumRepo
