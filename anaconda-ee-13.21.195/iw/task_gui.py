@@ -115,12 +115,11 @@ class AbiquoPlatformTasks(gtk.TreeView):
         for g in ['abiquo-server', 'abiquo-remote-services', 'abiquo-v2v', 'abiquo-monolithic']:
             if g in self.anaconda.id.abiquo.selectedGroups:
                 sel = False
-        
         self.store.append([sel, "None", 'none'])
 
         # check if monolithic previously selected
-        # self.store.append([('abiquo-monolithic' in self.anaconda.id.abiquo.selectedGroups), "Monolithic Install", 'abiquo-monolithic'])
-        self.store.append([sel, "Monolithic Install", 'abiquo-monolithic'])
+        self.store.append([('abiquo-monolithic' in self.anaconda.id.abiquo.selectedGroups), "Monolithic Install", 'abiquo-monolithic'])
+        # self.store.append([sel, "Monolithic Install", 'abiquo-monolithic'])
 
         # check if distributed previously selected
         sel = False
@@ -143,6 +142,7 @@ class AbiquoPlatformTasks(gtk.TreeView):
             log.info("Adding %s to selected groups" % self.selected_task)
             self.anaconda.id.abiquo.selectedGroups.append(self.selected_task)
         
+
         for row in self.store:
             if not row[0] and \
                     (row[2] != 'none') and \
@@ -192,9 +192,12 @@ class TaskWindow(InstallWindow):
                 #map(lambda x: self.backend.ayum.selectGroup(x), [g])
                 log.info("Selecting group: %s " % g)
                 map(lambda x: self.backend.selectGroup(x), [g])
-            else:
-                log.info("Deselecting group: %s " % g)
-                map(lambda x: self.backend.deselectGroup(x), [g])
+            # else:
+                # log.info("Deselecting group: %s " % g)
+                # map(lambda x: self.backend.deselectGroup(x), [g])
+
+        log.info('Finished group selection (2): %s' % self.anaconda.id.abiquo.selectedGroups)
+        log.info('Backend selection (2): %s' % self.anaconda.id.abiquo.selectedGroups)
      
 
 
@@ -215,10 +218,11 @@ class TaskWindow(InstallWindow):
 
         if 'abiquo-distributed' not in self.anaconda.id.abiquo.selectedGroups:
             self.dispatch.skipStep("abiquo_distributed", skip = 1)
-            for g in ['abiquo-server', 'abiquo-remote-services', 'abiquo-v2v', 'abiquo-distributed']:
-                map(self.backend.deselectGroup, [g])
-                if g in self.anaconda.id.abiquo.selectedGroups:
-                    self.anaconda.id.abiquo.selectedGroups.remove(g)
+            # for g in ['abiquo-server', 'abiquo-remote-services', 'abiquo-v2v', 'abiquo-distributed']:
+                
+                # map(self.backend.deselectGroup, [g])
+                # if g in self.anaconda.id.abiquo.selectedGroups:
+                    # self.anaconda.id.abiquo.selectedGroups.remove(g)
         else:
             self.dispatch.skipStep("abiquo_distributed", skip = 0)
 
