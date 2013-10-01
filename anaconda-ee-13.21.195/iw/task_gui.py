@@ -160,7 +160,7 @@ class AbiquoHypervisorTasks(AbiquoPlatformTasks):
          sel = True
          # for g in ['abiquo-kvm', 'abiquo-xen', 'abiquo-virtualbox']:
          for g in ['abiquo-kvm']:
-             if g in self.anaconda.id.abiquo.selectedGroups:
+            if g in self.anaconda.id.abiquo.selectedGroups:
                 sel = False
          self.store.append([sel, "None", 'none'])
          self.store.append([('abiquo-kvm' in self.anaconda.id.abiquo.selectedGroups), "KVM Cloud Node", 'abiquo-kvm'])
@@ -175,7 +175,12 @@ class AbiquoStorageTasks(AbiquoPlatformTasks):
     
     def _setupStore(self):
         self.store = gtk.ListStore(gobject.TYPE_BOOLEAN, gobject.TYPE_STRING, gobject.TYPE_STRING)
-        # self.store.append([('abiquo-lvm-storage-server' not in self.anaconda.id.abiquo.selectedGroups), "None", 'none'])
+        
+        sel = True
+        for g in ['abiquo-lvm-storage-server']:
+            if g in self.anaconda.id.abiquo.selectedGroups:
+                sel = False
+        self.store.append([sel, "None", 'none'])
         self.store.append([('abiquo-lvm-storage-server' in self.anaconda.id.abiquo.selectedGroups), "Abiquo LVM Server", 'abiquo-lvm-storage-server'])
         self.set_model(self.store)
 
