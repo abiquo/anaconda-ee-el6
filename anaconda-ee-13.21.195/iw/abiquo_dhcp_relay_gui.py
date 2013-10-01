@@ -78,7 +78,9 @@ class AbiquoDHCPRelayWindow(InstallWindow):
         netinfo = network.Network()
         management_if_store = gtk.ListStore(gobject.TYPE_STRING)
         service_if_store = gtk.ListStore(gobject.TYPE_STRING)
-        for dev in netinfo.available().keys():
+        
+        # Avaliable devices
+        for dev in anaconda.id.network.netdevices:
             service_if_store.append([dev])
             management_if_store.append([dev])
             
