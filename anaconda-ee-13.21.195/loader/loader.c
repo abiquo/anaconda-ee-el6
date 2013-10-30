@@ -2286,6 +2286,18 @@ int main(int argc, char ** argv) {
     if ((i = chooseNetworkInterface(&loaderData)) != 0) {
         logMessage(ERROR, "chooseNetworkInterface failure: %d", i);
     }
+    else {
+        logMessage(INFO, "Interface chosen: %d", loaderData->netDev);
+    }
+    devName = loaderData->netDev;
+    strcpy(iface.device, devName);
+    if ((i = writeEnabledNetInfo(&iface)) != 0) {
+        logMessage(ERROR, "writeEnabledNetInfo failure: %d", i);
+    }
+    
+    /* Prevent asking about interface for updates.img */
+    loaderData->netDev_set = 1;
+    /***/
 
     /* Enable vlan and bonding support in NetworkManager */
     if ((i = enable_NM_BOND_VLAN()) != 0) {
