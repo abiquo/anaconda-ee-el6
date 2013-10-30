@@ -2287,10 +2287,10 @@ int main(int argc, char ** argv) {
         logMessage(ERROR, "chooseNetworkInterface failure: %d", i);
     }
     else {
-        logMessage(INFO, "Interface chosen: %d", &(loaderData.netDev));
+        logMessage(INFO, "Interface chosen: %s", loaderData.netDev);
     }
 
-    strcpy(iface.device, &(loaderData.netDev));
+    strcpy(iface.device, loaderData.netDev);
     if ((i = writeEnabledNetInfo(&iface)) != 0) {
         logMessage(ERROR, "writeEnabledNetInfo failure: %d", i);
     }
