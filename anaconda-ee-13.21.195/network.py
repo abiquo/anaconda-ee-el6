@@ -468,10 +468,12 @@ class Network:
     # devices == None => set for all
     def updateActiveDevices(self, devices=None):
         for devname, device in self.netdevices.items():
-            if devices and devname not in devices:
-                device.set(('ONBOOT', 'no'))
-            else:
-                device.set(('ONBOOT', 'yes'))
+            # Enable all devices on boot
+            device.set(('ONBOOT', 'yes'))
+            #if devices and devname not in devices:
+            #    device.set(('ONBOOT', 'no'))
+            #else:
+            #    device.set(('ONBOOT', 'yes'))
 
     def getOnbootControlledIfaces(self):
         ifaces = []
