@@ -2282,6 +2282,11 @@ int main(int argc, char ** argv) {
     }
 #endif
 
+    /* ABIQUO: Use one network interface by default */
+    if ((i = chooseNetworkInterface(&loaderData)) != 0) {
+        logMessage(ERROR, "chooseNetworkInterface failure: %d", i);
+    }
+
     /* Enable vlan and bonding support in NetworkManager */
     if ((i = enable_NM_BOND_VLAN()) != 0) {
         logMessage(INFO, "failed to enable VLAN for NetworkManager");
