@@ -5,6 +5,8 @@ import re
 import shutil
 import logging
 import glob
+import network
+import isys
 import stat
 log = logging.getLogger("anaconda")
 import fileinput
@@ -63,6 +65,17 @@ exit 0
                                 stdout="/dev/tty5", stderr="/dev/tty5",
                                 root=anaconda.rootPath)
 
+
+    # Select first dev with link and change ifcfg to start on boot
+    for device in anaconda.id.network.netdevices:
+        log.info("DBG: device detected %s " % device ) 
+        if isys.getLinkStatus(device):
+            dev = network.NetworkDevice(anaconda.rootPath + network.netscriptsDir, device)
+            dev.loadIfcfgFile()
+            dev.set(('ONBOOT', 'yes'))
+            dev.writeIfcfgFile()
+            log.info("Setting ONBOOT=yes for network device with link: %s " % device)
+        
 
     # loopback up
     iutil.execWithRedirect("/sbin/ifconfig",
