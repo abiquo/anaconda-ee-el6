@@ -87,7 +87,7 @@ class AbiquoRSWindow(InstallWindow):
     def helpButtonClicked(self, data):
         log.info("helpButtonClicked")
         msg = (
-        "<b>NFS Repository</b>\n"
+        "NFS Repository\n"
         "The NFS URI where the Abiquo NFS repository is located.\n"
         "i.e.\n"
         "my-nfs-server-ip:/opt/vm_repository\n"
@@ -100,7 +100,7 @@ class AbiquoRSWindow(InstallWindow):
         "make sure you use the same Datacenter ID when installing V2V services.\n"
         "\n"
         )
-        self.intf.messageWindow("<b>Remote Services Settings</b>", msg, type="ok")
+        self.intf.messageWindow("Remote Services Settings", msg, type="ok")
 
     def getScreen (self, anaconda):
         self.intf = anaconda.intf

@@ -45,20 +45,32 @@ class AbiquoDistributedWindow(InstallWindow):
 		self.dispatch.skipStep("abiquo_v2v", skip = 1)
         
     def _selectionChanged(self, btn):
-        lbl = btn.get_label()
+        lbl = btn.get_name()
+        #if not btn.get_sensitive():
+        #    btn.set_active(False)
         if btn.get_active():
-            if lbl == 'Abiquo Server':
+            if lbl == 'AbiquoServerRadio':
                 self.data.abiquo.selectedGroups.append('abiquo-server')
-            elif lbl == 'Abiquo Remote Services':
+                self.xml.get_widget('AbiquoGUIRadio').set_active(False)
+                self.xml.get_widget('AbiquoGUIRadio').set_sensitive(False)
+                self.xml.get_widget('AbiquoAPIRadio').set_active(False)
+                self.xml.get_widget('AbiquoAPIRadio').set_sensitive(False)
+                # revome group
+            elif lbl == 'AbiquoRSRadio':
                 self.data.abiquo.selectedGroups.append('abiquo-remote-services')
-            elif lbl == 'Abiquo V2V Services':
+                self.xml.get_widget('AbiquoPublicRadio').set_active(False)
+                self.xml.get_widget('AbiquoPublicRadio').set_sensitive(False)
+            elif lbl == 'abiquoV2VRadio':
                 self.data.abiquo.selectedGroups.append('abiquo-v2v')
         else:
-            if lbl == 'Abiquo Server':
+            if lbl == 'AbiquoServerRadio':
                 self.data.abiquo.selectedGroups.remove('abiquo-server')
-            elif lbl == 'Abiquo Remote Services':
+                self.xml.get_widget('AbiquoGUIRadio').set_sensitive(True)
+                self.xml.get_widget('AbiquoAPIRadio').set_sensitive(True)
+            elif lbl == 'AbiquoRSRadio':
                 self.data.abiquo.selectedGroups.remove('abiquo-remote-services')
-            elif lbl == 'Abiquo V2V Services':
+                self.xml.get_widget('AbiquoPublicRadio').set_sensitive(True)
+            elif lbl == 'abiquoV2VRadio':
                 self.data.abiquo.selectedGroups.remove('abiquo-v2v')
 
     def getScreen (self, anaconda):
@@ -71,13 +83,14 @@ class AbiquoDistributedWindow(InstallWindow):
         for g in self.data.abiquo.selectedGroups:
             if g == 'abiquo-server':
                 self.xml.get_widget('abiquoServerRadio').set_active(True)
+                #self.xml.get_widget('abiquoDummyRadio').set_inconsistent(True)
             elif g == 'abiquo-v2v':
                 self.xml.get_widget('abiquoV2VRadio').set_active(True)
             elif g == 'abiquo-remote-services':
                 self.xml.get_widget('abiquoRSRadio').set_active(True)
             else:
                 pass
-        for btn in ['abiquoServerRadio', 'abiquoRSRadio', 'abiquoV2VRadio']:
+        for btn in ['AbiquoServerRadio', 'AbiquoRSRadio', 'AbiquoV2VRadio']:
             self.xml.get_widget(btn).connect(
                     'toggled',
                     self._selectionChanged)
