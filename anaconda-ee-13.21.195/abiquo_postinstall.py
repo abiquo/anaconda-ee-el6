@@ -113,6 +113,12 @@ exit 0
                             anaconda.id.abiquo_rs.abiquo_nfs_repository )
                 f.close()
     
+    # Add bash completion for root
+    if ( os.path.exists(anaconda.rootPath + '/etc/bash_completion') and os.path.exists(anaconda.rootPath + '/root/.bashrc') ):
+        f = open(anaconda.rootPath + "/root/.bashrc", "a")
+        f.write("source /etc/bash_completion\n")
+        f.close()
+
     # KVM
     if anaconda.backend.isGroupSelected('abiquo-kvm'):
         f = fileinput.FileInput(anaconda.rootPath + "/etc/abiquo-aim.ini",inplace=1)

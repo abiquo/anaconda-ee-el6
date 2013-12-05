@@ -315,12 +315,11 @@ def rpmSetupGraphicalSystem(anaconda):
     iutil.resetRpmDb(anaconda.rootPath)
     ts = rpm.TransactionSet(anaconda.rootPath)
 
-    # "rhgb" disabled, it nags abiquo-firstboot. Disabling 'quiet' is too much logging.
     if iutil.isConsoleOnVirtualTerminal() and \
        (ts.dbMatch('provides', 'rhgb').count() or \
         ts.dbMatch('provides', 'plymouth').count()):
         anaconda.id.bootloader.args.append("quiet")
-    #   anaconda.id.bootloader.args.append("rhgb")
+        anaconda.id.bootloader.args.append("rhgb")
 
     if ts.dbMatch('provides', 'service(graphical-login)').count() and \
        ts.dbMatch('provides', 'xorg-x11-server-Xorg').count() and \
