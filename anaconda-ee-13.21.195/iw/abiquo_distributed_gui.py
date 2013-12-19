@@ -7,6 +7,12 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #
+# AbiquoServerRadio
+#   AbiquoGUIRadio
+#   AbiquoAPIRadio
+# AbiquoRSRadio
+#   AbiquoPublicRadio
+# AbiquoV2VRadio
 
 import gtk
 import gtk.glade
@@ -51,17 +57,28 @@ class AbiquoDistributedWindow(InstallWindow):
         if btn.get_active():
             if lbl == 'AbiquoServerRadio':
                 self.data.abiquo.selectedGroups.append('abiquo-server')
+                if ('abiquo-standalone-ui' in self.anaconda.id.abiquo.selectedGroups):
+                    self.data.abiquo.selectedGroups.remove('abiquo-standalone-ui')
+                if ('abiquo-standalone-api' in self.anaconda.id.abiquo.selectedGroups):
+                    self.data.abiquo.selectedGroups.remove('abiquo-standalone-api')
                 self.xml.get_widget('AbiquoGUIRadio').set_active(False)
                 self.xml.get_widget('AbiquoGUIRadio').set_sensitive(False)
                 self.xml.get_widget('AbiquoAPIRadio').set_active(False)
                 self.xml.get_widget('AbiquoAPIRadio').set_sensitive(False)
-                # revome group
             elif lbl == 'AbiquoRSRadio':
                 self.data.abiquo.selectedGroups.append('abiquo-remote-services')
+                if ('abiquo-public-services' in self.anaconda.id.abiquo.selectedGroups):
+                    self.data.abiquo.selectedGroups.remove('abiquo-public-services')
                 self.xml.get_widget('AbiquoPublicRadio').set_active(False)
                 self.xml.get_widget('AbiquoPublicRadio').set_sensitive(False)
-            elif lbl == 'abiquoV2VRadio':
+            elif lbl == 'AbiquoV2VRadio':
                 self.data.abiquo.selectedGroups.append('abiquo-v2v')
+            elif lbl == 'AbiquoGUIRadio':
+                self.data.abiquo.selectedGroups.append('abiquo-standalone-ui')
+            elif lbl == 'AbiquoAPIRadio':
+                self.data.abiquo.selectedGroups.append('abiquo-standalone-api')
+            elif lbl == 'AbiquoPublicRadio':
+                self.data.abiquo.selectedGroups.append('abiquo-public-services')
         else:
             if lbl == 'AbiquoServerRadio':
                 self.data.abiquo.selectedGroups.remove('abiquo-server')
@@ -70,27 +87,38 @@ class AbiquoDistributedWindow(InstallWindow):
             elif lbl == 'AbiquoRSRadio':
                 self.data.abiquo.selectedGroups.remove('abiquo-remote-services')
                 self.xml.get_widget('AbiquoPublicRadio').set_sensitive(True)
-            elif lbl == 'abiquoV2VRadio':
+            elif lbl == 'AbiquoV2VRadio':
                 self.data.abiquo.selectedGroups.remove('abiquo-v2v')
+            elif lbl == 'AbiquoGUIRadio' and ('abiquo-standalone-ui' in self.anaconda.id.abiquo.selectedGroups):
+                self.data.abiquo.selectedGroups.remove('abiquo-standalone-ui')
+            elif lbl == 'AbiquoAPIRadio' and ('abiquo-standalone-api' in self.anaconda.id.abiquo.selectedGroups):
+                self.data.abiquo.selectedGroups.remove('abiquo-standalone-api')
+            elif lbl == 'AbiquoPublicRadio' and ('abiquo-public-services' in self.anaconda.id.abiquo.selectedGroups):
+                self.data.abiquo.selectedGroups.remove('abiquo-public-services')
 
     def getScreen (self, anaconda):
         self.anaconda = anaconda
         self.data = anaconda.id
         self.backend = anaconda.backend
         self.dispatch = anaconda.dispatch
-        
         (self.xml, vbox) = gui.getGladeWidget("abiquo_distributed.glade", "settingsBox")
+
         for g in self.data.abiquo.selectedGroups:
             if g == 'abiquo-server':
-                self.xml.get_widget('abiquoServerRadio').set_active(True)
-                #self.xml.get_widget('abiquoDummyRadio').set_inconsistent(True)
+                self.xml.get_widget('AbiquoServerRadio').set_active(True)
             elif g == 'abiquo-v2v':
-                self.xml.get_widget('abiquoV2VRadio').set_active(True)
+                self.xml.get_widget('AbiquoV2VRadio').set_active(True)
             elif g == 'abiquo-remote-services':
-                self.xml.get_widget('abiquoRSRadio').set_active(True)
+                self.xml.get_widget('AbiquoRSRadio').set_active(True)
+            elif g == 'abiquo-standalone-ui':
+                self.xml.get_widget('AbiquoGUIRadio').set_active(True)
+            elif g == 'abiquo-standalone-api':
+                self.xml.get_widget('AbiquoAPIRadio').set_active(True)
+            elif g == 'abiquo-public-services':
+                self.xml.get_widget('AbiquoPublicRadio').set_active(True)
             else:
                 pass
-        for btn in ['AbiquoServerRadio', 'AbiquoRSRadio', 'AbiquoV2VRadio']:
+        for btn in ['AbiquoServerRadio', 'AbiquoRSRadio', 'AbiquoV2VRadio', 'AbiquoGUIRadio', 'AbiquoAPIRadio','AbiquoPublicRadio']:
             self.xml.get_widget(btn).connect(
                     'toggled',
                     self._selectionChanged)

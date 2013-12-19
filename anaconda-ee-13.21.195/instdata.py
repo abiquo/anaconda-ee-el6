@@ -179,6 +179,7 @@ class InstallData:
         self.users = users.Users()
 
         # abiquo settings
+        # !!! Move this to postinstall 
         if self.anaconda.backend.isGroupSelected('abiquo-server') or \
                 self.anaconda.backend.isGroupSelected('abiquo-monolithic'):
                     log.info("Writing abiquo settings")

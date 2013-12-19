@@ -41,6 +41,7 @@ class Abiquo:
         # if abiquo config directory does not exist, we are installing a HV
         # don't need this
         #
+        # !!! We should handle this outside.
         if os.path.isdir(instPath + '/opt/abiquo/config/'):
             f = open(instPath + "/opt/abiquo/config/abiquo.properties", 'a')
             f.write("[server]\n")
@@ -62,7 +63,7 @@ class Abiquo:
                     self.abiquo_database_host )
             f.write("abiquo.auth.module = %s\n" %
                     self.abiquo_auth_module )
-            f.write("abiquo.server.api.location = http://%s/api\n" %
+            f.write("abiquo.server.api.location = http://%s:8009/api\n" %
                     self.abiquo_server_ip )
             # add redis props if not instaling remote services
             if not os.path.isdir(instPath + '/opt/abiquo/tomcat/webapps/virtualfactory'):

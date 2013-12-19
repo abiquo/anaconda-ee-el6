@@ -13,10 +13,7 @@ import gtk.glade
 import gobject
 import gui
 from iw_gui import *
-# from rhpl.translate import _, N_
 from constants import *
-
-# from netconfig_dialog import NetworkConfigurator
 import network
 
 from yuminstall import AnacondaYumRepo
@@ -25,6 +22,7 @@ import yum.Errors
 import logging
 log = logging.getLogger("anaconda")
 
+# !!! Complete description
 DESC_ABI_PLATFORM = """
 <b>Abiquo Platform</b>
 
@@ -34,14 +32,14 @@ The installation types and main components are as follows:
 For small installations. Includes: Abiquo Server, Remote Services, V2V Services
 
 <u>Distributed</u>
-For large installations. Select any combination of: Abiquo Server, Abiquo Remote Services and Abiquo V2V Services
+For large installations. Select combination of: Abiquo Server or only GUI or API, Abiquo Remote Services or Abiquo Public Services,  and Abiquo V2V Services.
 
 """
 
-# Additional Components
+# Additional Components:
 # NFS Repository
-# HTTP Repository
 # DHCP Relay
+# Remote HTTP repository not implemented yet
 class AbiquoAdditionalTasks(gtk.TreeView):
     def __init__(self,anaconda):
         self.anaconda = anaconda
@@ -66,10 +64,9 @@ class AbiquoAdditionalTasks(gtk.TreeView):
         self.set_model(self.store)
 
         # for g in ['abiquo-nfs-repository', 'abiquo-remote-repository', 'abiquo-dhcp-relay']:
-        for g in ['abiquo-nfs-repository', 'abiquo-remote-repository', 'abiquo-dhcp-relay']:
+        for g in ['abiquo-nfs-repository', 'abiquo-dhcp-relay']:
             if (g in self.anaconda.id.abiquo.selectedGroups):
                 self.selected_tasks.append(g)
-
 
     def _taskToggled(self, path, row):
         i = self.store.get_iter(int(row))
@@ -83,14 +80,14 @@ class AbiquoAdditionalTasks(gtk.TreeView):
             self.selected_tasks.remove(comp)
             self.anaconda.id.abiquo.selectedGroups.remove(comp)
 
-#
+
 # Platform Task
 # List of Abiquo Groups
 # Abiquo Platform
-# Abiquo Storage Servers
-# Abiquo Hypervisors
+# Abiquo Storage Server
+# Abiquo Hypervisor
 # Abiquo Additional Components
-#
+
 class AbiquoPlatformTasks(gtk.TreeView):
     def __init__(self, anaconda):
         self.anaconda = anaconda
@@ -101,7 +98,6 @@ class AbiquoPlatformTasks(gtk.TreeView):
         cbr.set_radio(True)
         col = gtk.TreeViewColumn('', cbr, active = 0)
         cbr.connect("toggled", self._taskToggled)
-        #self.get_selection().connect('changed', self._selectionChanged)
         self.append_column(col)
         col = gtk.TreeViewColumn('Available Components', gtk.CellRendererText(), text = 1)
         col.set_clickable(False)
@@ -112,7 +108,7 @@ class AbiquoPlatformTasks(gtk.TreeView):
 
         # Check if no abiquo groups have been selected
         sel = True
-        for g in ['abiquo-server', 'abiquo-remote-services', 'abiquo-v2v', 'abiquo-monolithic']:
+        for g in ['abiquo-server', 'abiquo-remote-services', 'abiquo-v2v', 'abiquo-monolithic','abiquo-standalone-ui','abiquo-standalone-api','abiquo-public-services']:
             if g in self.anaconda.id.abiquo.selectedGroups:
                 sel = False
         self.store.append([sel, "None", 'none'])
@@ -123,7 +119,7 @@ class AbiquoPlatformTasks(gtk.TreeView):
 
         # check if distributed previously selected
         sel = False
-        for g in ['abiquo-server', 'abiquo-remote-services', 'abiquo-v2v']:
+        for g in ['abiquo-server', 'abiquo-remote-services', 'abiquo-v2v', 'abiquo-standalone-ui','abiquo-standalone-api','abiquo-public-services']:
             if g in self.anaconda.id.abiquo.selectedGroups:
                 sel = True
         self.store.append([sel, "Distributed Install", 'abiquo-distributed'])
@@ -141,7 +137,6 @@ class AbiquoPlatformTasks(gtk.TreeView):
         if comp != 'none':
             log.info("Adding %s to selected groups" % self.selected_task)
             self.anaconda.id.abiquo.selectedGroups.append(self.selected_task)
-        
 
         for row in self.store:
             if not row[0] and \
@@ -149,6 +144,8 @@ class AbiquoPlatformTasks(gtk.TreeView):
                     (row[2] in self.anaconda.id.abiquo.selectedGroups):
                         self.anaconda.id.abiquo.selectedGroups.remove(row[2])
 
+# KVM
+# Legacy hypervisors XEN and VirtualBox not supported
 class AbiquoHypervisorTasks(AbiquoPlatformTasks):
  
      def __init__(self, anaconda):
@@ -188,24 +185,16 @@ class TaskWindow(InstallWindow):
 
     def getNext(self):
         log.info('Finished group selection: %s' % self.anaconda.id.abiquo.selectedGroups)
-        log.info('Backend selection: %s' % self.anaconda.id.abiquo.selectedGroups)
 
         self.dispatch.skipStep("abiquo_password", skip = 1)
+        self.dispatch.skipStep("abiquo_nfs_config", skip = 1)
 
         for g in self.abiquo_groups:
             if g in self.anaconda.id.abiquo.selectedGroups:
-                #map(lambda x: self.backend.ayum.selectGroup(x), [g])
                 log.info("Selecting group: %s " % g)
                 map(lambda x: self.backend.selectGroup(x), [g])
-            # else:
-                # log.info("Deselecting group: %s " % g)
-                # map(lambda x: self.backend.deselectGroup(x), [g])
 
-        log.info('Finished group selection (2): %s' % self.anaconda.id.abiquo.selectedGroups)
-        log.info('Backend selection (2): %s' % self.anaconda.id.abiquo.selectedGroups)
-     
-
-
+        # !!! moved to postinstall
         for g in ['abiquo-remote-services', 'abiquo-monolithic']:
             if g not in self.anaconda.id.abiquo.selectedGroups:
                 self.dispatch.skipStep("abiquo_rs", skip = 1)
@@ -214,7 +203,8 @@ class TaskWindow(InstallWindow):
         for g in ['abiquo-server', 'abiquo-monolithic']:
             if g in self.anaconda.id.abiquo.selectedGroups:
                 self.dispatch.skipStep("abiquo_password", skip = 0)
-        # FIXME  ?
+
+        # !!! moved to postinstall
         if (('abiquo-monolithic' in self.anaconda.id.abiquo.selectedGroups) and \
                 ('abiquo-nfs-repository' in self.anaconda.id.abiquo.selectedGroups)) or \
                 ('abiquo-dhcp-relay' in self.anaconda.id.abiquo.selectedGroups) or \
@@ -223,40 +213,35 @@ class TaskWindow(InstallWindow):
 
         if 'abiquo-distributed' not in self.anaconda.id.abiquo.selectedGroups:
             self.dispatch.skipStep("abiquo_distributed", skip = 1)
-            # for g in ['abiquo-server', 'abiquo-remote-services', 'abiquo-v2v', 'abiquo-distributed']:
-                
-                # map(self.backend.deselectGroup, [g])
-                # if g in self.anaconda.id.abiquo.selectedGroups:
-                    # self.anaconda.id.abiquo.selectedGroups.remove(g)
         else:
             self.dispatch.skipStep("abiquo_distributed", skip = 0)
 
+        # !!! moved to postinstall
         if ('abiquo-kvm' in self.anaconda.id.abiquo.selectedGroups):
             self.dispatch.skipStep("abiquo_hv", skip = 0)
             self.dispatch.skipStep("abiquo_nfs_config", skip = 1, permanent = 1)
         else:
             self.dispatch.skipStep("abiquo_hv", skip = 1)
- 
 
-
-        if 'abiquo-remote-repository' in self.anaconda.id.abiquo.selectedGroups:
-            if 'abiquo-distributed' in self.anaconda.id.abiquo.selectedGroups:
-                self.intf.messageWindow(_("<b>Warning</b>"),
-                           _("<b>Overlapping tasks selected</b>\n\n"
-                             "You have selected <i>Abiquo Distributed</i> install. "
-                             "Selecting Abiquo Remote Repository is not allowed. Please, "
-                             "deselect Abiquo Remote Repository and click next."),
-                                    type="warning")
-                raise gui.StayOnScreen
-            
-            if 'abiquo-monolithic' in self.anaconda.id.abiquo.selectedGroups:
-                self.intf.messageWindow(_("<b>Warning</b>"),
-                           _("<b>Overlapping tasks selected</b>\n\n"
-                             "You have selected <i>Abiquo Distributed</i> install. "
-                             "Selecting Abiquo Remote Repository is not allowed. Please, "
-                             "deselect Abiquo Remote Repository and click next."),
-                                    type="warning")
-                raise gui.StayOnScreen
+        # !!! remove this
+        # if 'abiquo-remote-repository' in self.anaconda.id.abiquo.selectedGroups:
+        #    if 'abiquo-distributed' in self.anaconda.id.abiquo.selectedGroups:
+        #        self.intf.messageWindow(_("<b>Warning</b>"),
+        #                   _("<b>Overlapping tasks selected</b>\n\n"
+        #                     "You have selected <i>Abiquo Distributed</i> install. "
+        #                     "Selecting Abiquo Remote Repository is not allowed. Please, "
+        #                     "deselect Abiquo Remote Repository and click next."),
+        #                            type="warning")
+        #        raise gui.StayOnScreen
+        #    
+        #    if 'abiquo-monolithic' in self.anaconda.id.abiquo.selectedGroups:
+        #        self.intf.messageWindow(_("<b>Warning</b>"),
+        #                   _("<b>Overlapping tasks selected</b>\n\n"
+        #                     "You have selected <i>Abiquo Distributed</i> install. "
+        #                     "Selecting Abiquo Remote Repository is not allowed. Please, "
+        #                     "deselect Abiquo Remote Repository and click next."),
+        #                            type="warning")
+        #        raise gui.StayOnScreen
 
         if not ('abiquo-dhcp-relay' in self.anaconda.id.abiquo.selectedGroups):
             self.dispatch.skipStep("abiquo_dhcp_relay", skip = 1)
@@ -309,13 +294,13 @@ class TaskWindow(InstallWindow):
         self.anaconda = anaconda
         self.abiquo_groups = ['abiquo-monolithic',
                   'abiquo-server', 'abiquo-remote-services', 'abiquo-v2v',
+                  'abiquo-standalone-ui','abiquo-standalone-api','abiquo-public-services',
                   'abiquo-lvm-storage-server', 'abiquo-kvm',
                   'abiquo-dhcp-relay', 'abiquo-nfs-repository',
                   'abiquo-remote-repository'
                   ]
 
         self.tasks = anaconda.id.instClass.tasks
-        # self.repo = anaconda.id.instClass.repo
         
         (self.xml, vbox) = gui.getGladeWidget("tasksel.glade", "mainWidget")
         (self.diag1_xml, diag) = gui.getGladeWidget("tasksel.glade", "dialog1")
@@ -339,4 +324,3 @@ class TaskWindow(InstallWindow):
         w.add(self.abiquo_platform_tasks)
         self.abiquo_platform_tasks.show()
         return vbox
-

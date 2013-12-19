@@ -14,81 +14,39 @@ import fileinput
 def abiquoPostInstall(anaconda):
     log.info("Abiquo postinstall")
 
-    if os.path.exists(anaconda.rootPath + '/opt/abiquo/tomcat/webapps/api'):
-	# Write motd init script
-	f = open(anaconda.rootPath + "/etc/rc.d/init.d/motd", "w")
-	f.write("""
-#!/bin/sh
-#
-# motd	Prepares /etc/motd file
-#
-# chkconfig: 2345 99 05
-# description: Prepares /etc/motd file
-#
-### BEGIN INIT INFO
-# Provides: motd
-# Default-Start: 2345
-# Default-Stop: 0 1 6
-# Short-Description: Prepares /etc/motd file
-# Description: Prepares /etc/motd file
-### END INIT INFO
-
-HOSTNAME=`/bin/uname -a | awk '{print $2}'`
-IP_ADDRESS=`ip addr list |grep eth | grep "inet " | cut -d' ' -f6 | cut -d/ -f1`
-
-clear
-echo -e "\nAbiquo Server\n\nHostname: $HOSTNAME" > /etc/motd
-cat /etc/abiquo-release >> /etc/motd
-
-echo -e "\nThe Abiquo server is now running. You can login from a Web browser at:" >> /etc/motd
-
-for ip in $IP_ADDRESS; do
-	echo -e "http://$ip" >> /etc/motd
-done
-echo >> /etc/motd
-
-exit 0
-""")
-	f.close()
- 
     # Enable MOTD
-	iutil.execWithRedirect("/bin/chmod",
+    iutil.execWithRedirect("/bin/chmod",
                                 ['a+x', "/etc/rc.d/init.d/motd"],
                                 stdout="/dev/tty5", stderr="/dev/tty5",
                                 root=anaconda.rootPath)
-	iutil.execWithRedirect("/sbin/chkconfig",
+    iutil.execWithRedirect("/sbin/chkconfig",
                                 ['--add', "motd"],
                                 stdout="/dev/tty5", stderr="/dev/tty5",
                                 root=anaconda.rootPath)
-	iutil.execWithRedirect("/sbin/chkconfig",
+    iutil.execWithRedirect("/sbin/chkconfig",
                                 ['motd', "on"],
                                 stdout="/dev/tty5", stderr="/dev/tty5",
                                 root=anaconda.rootPath)
 
-
     # Select first dev with link and change ifcfg to start on boot
     for device in anaconda.id.network.netdevices:
-        log.info("DBG: device detected %s " % device ) 
         if isys.getLinkStatus(device):
             dev = network.NetworkDevice(anaconda.rootPath + network.netscriptsDir, device)
             dev.loadIfcfgFile()
             dev.set(('ONBOOT', 'yes'))
             dev.writeIfcfgFile()
             log.info("Setting ONBOOT=yes for network device with link: %s " % device)
-        
 
     # loopback up
     iutil.execWithRedirect("/sbin/ifconfig",
                             ['lo', 'up'],
                             stdout="/mnt/sysimage/var/log/abiquo-postinst.log", stderr="//mnt/sysimage/var/log/abiquo-postinst.log",
                             root=anaconda.rootPath)
-
     # Disable firewall
     iutil.execWithRedirect("/sbin/chkconfig",
                             ['iptables', "off"],
                             stdout="/dev/tty5", stderr="/dev/tty5",
                             root=anaconda.rootPath)
-    # TODO: Leave it on and open required ports.
 
     # Disable SElinux
     f = fileinput.FileInput(anaconda.rootPath + "/etc/sysconfig/selinux",inplace=1)
@@ -103,31 +61,13 @@ exit 0
         print line.rstrip()
     f.close()
 
-    if (anaconda.backend.isGroupSelected('abiquo-v2v') or \
-            anaconda.backend.isGroupSelected('abiquo-monolithic') or \
-            anaconda.backend.isGroupSelected('abiquo-kvm') or \
-            anaconda.backend.isGroupSelected('abiquo-remote-services')) and \
-            not anaconda.backend.isGroupSelected('abiquo-nfs-repository'):
-                f = open(anaconda.rootPath + "/etc/fstab", "a")
-                f.write("%s /opt/vm_repository  nfs defaults    0 0\n" %
-                            anaconda.id.abiquo_rs.abiquo_nfs_repository )
-                f.close()
-    
     # Add bash completion for root
     if ( os.path.exists(anaconda.rootPath + '/etc/bash_completion') and os.path.exists(anaconda.rootPath + '/root/.bashrc') ):
         f = open(anaconda.rootPath + "/root/.bashrc", "a")
         f.write("source /etc/bash_completion\n")
         f.close()
 
-    # KVM
-    if anaconda.backend.isGroupSelected('abiquo-kvm'):
-        f = fileinput.FileInput(anaconda.rootPath + "/etc/abiquo-aim.ini",inplace=1)
-        for line in f:
-            line = line.replace("redisHost = 127.0.0.1","redisHost = %s" % anaconda.id.abiquo.abiquo_rs_ip)
-            print line.rstrip()
-        f.close()        
-
-    # DHCP Relay
+    # DHCP is set at installer
     if anaconda.backend.isGroupSelected('abiquo-dhcp-relay'):
         vrange1 = anaconda.id.abiquo.abiquo_dhcprelay_vrange_1
         vrange2 = anaconda.id.abiquo.abiquo_dhcprelay_vrange_2
@@ -145,23 +85,20 @@ exit 0
                                 ['relay-config', "on"],
                                 stdout="/dev/tty5", stderr="/dev/tty5",
                                 root=anaconda.rootPath)
-
-
+    # Export NFS
     if anaconda.backend.isGroupSelected('abiquo-nfs-repository') and not \
             anaconda.backend.isGroupSelected('abiquo-monolithic'):
         f = open(anaconda.rootPath + "/etc/exports", "a")
         f.write("/opt/vm_repository    *(rw,no_root_squash,subtree_check,insecure)\n")
         f.close()
 
-    # Avoid NFS check against /etc/mtab
+    # Don't check NFS in monolithic+nfs (local repo)
     if anaconda.backend.isGroupSelected('abiquo-nfs-repository') and \
             anaconda.backend.isGroupSelected('abiquo-monolithic'):
         f = open(anaconda.rootPath + "/opt/abiquo/config/abiquo.properties", "a")
         f.write("abiquo.appliancemanager.checkMountedRepository = false\n")
         f.close()
- 
 
-    
     if anaconda.backend.isGroupSelected('abiquo-nfs-repository'):
         iutil.execWithRedirect("/sbin/chkconfig",
                                 ['nfs', "on"],
@@ -184,45 +121,46 @@ exit 0
 
     if anaconda.backend.isGroupSelected('abiquo-server') or \
             anaconda.backend.isGroupSelected('abiquo-monolithic'):
-                iutil.execWithRedirect("/sbin/chkconfig",
-                                        ['rabbitmq-server', "on"],
-                                        stdout="/dev/tty5", stderr="/dev/tty5",
-                                        root=anaconda.rootPath)
-                # start MySQL to create the schema
-                iutil.execWithRedirect("/etc/init.d/mysql",
-                                        ['start'],
-                                        stdout="/mnt/sysimage/var/log/abiquo-postinst.log", stderr="/mnt/sysimage/var/log/abiquo-postinst.log",
-                                        root=anaconda.rootPath)
-
-                iutil.execWithRedirect("/sbin/chkconfig",
-                                        ['mysql', "on"],
-                                        stdout="/dev/tty5", stderr="/dev/tty5",
-                                        root=anaconda.rootPath)
-                schema = open(anaconda.rootPath + "/usr/share/doc/abiquo-server/database/kinton-schema.sql")
-
-		# replace default password
-		newschema = open(anaconda.rootPath + "/tmp/kinton-schema.sql", 'w')
-		for line in schema.readlines():
-			newschema.write(re.sub('c69a39bd64ffb77ea7ee3369dce742f3', anaconda.id.abiquoPasswordHex, line))
-			newschema.write("\n")	
-		newschema.close()
-
+        iutil.execWithRedirect("/sbin/chkconfig",
+                                ['rabbitmq-server', "on"],
+                                stdout="/dev/tty5", stderr="/dev/tty5",
+                                root=anaconda.rootPath)
+        # start MariaDB to create the schema
+        iutil.execWithRedirect("/etc/init.d/mysql",
+                                ['start'],
+                                stdout="/mnt/sysimage/var/log/abiquo-postinst.log", stderr="/mnt/sysimage/var/log/abiquo-postinst.log",
+                                root=anaconda.rootPath)
+        iutil.execWithRedirect("/sbin/chkconfig",
+                                ['mysql', "on"],
+                                stdout="/dev/tty5", stderr="/dev/tty5",
+                                root=anaconda.rootPath)
+        schema = open(anaconda.rootPath + "/usr/share/doc/abiquo-server/database/kinton-schema.sql")
+ 
+        # md5 hash is replaced by bcrypt salted hash at first login
+        newschema = open(anaconda.rootPath + "/tmp/kinton-schema.sql", 'w')
+        for line in schema.readlines():
+            newschema.write(re.sub('c69a39bd64ffb77ea7ee3369dce742f3', anaconda.id.abiquoPasswordHex, line))
+            newschema.write("\n")   
+        newschema.close()
         # create the schema
-		newschema = open(anaconda.rootPath + "/tmp/kinton-schema.sql")
-                iutil.execWithRedirect("/usr/bin/mysql",
-                                        [],
-                                        stdin=newschema,
-                                        stdout="/mnt/sysimage/var/log/abiquo-postinst.log", stderr="/mnt/sysimage/var/log/abiquo-postinst.log",
-                                        root=anaconda.rootPath)
-                schema.close()
-		newschema.close()
-
-
-    # Tweak security limits.conf file
-    slimits = open(anaconda.rootPath + "/etc/security/limits.conf", 'a')
-    slimits.write("root soft nofile 4096\n")
-    slimits.write("root hard nofile 10240\n")
-    slimits.close()
+        newschema = open(anaconda.rootPath + "/tmp/kinton-schema.sql")
+        iutil.execWithRedirect("/usr/bin/mysql",
+                                [],
+                                stdin=newschema,
+                                stdout="/mnt/sysimage/var/log/abiquo-postinst.log", stderr="/mnt/sysimage/var/log/abiquo-postinst.log",
+                                root=anaconda.rootPath)
+        schema.close()
+        newschema.close()
+    if anaconda.backend.isGroupSelected('abiquo-server') or \
+            anaconda.backend.isGroupSelected('abiquo-monolithic') or \
+            anaconda.backend.isGroupSelected('abiquo-standalone-ui') :
+        if os.path.exists(anaconda.rootPath + '/etc/httpd/conf.d/welcome.conf'):
+            shutil.move(anaconda.rootPath + '/etc/httpd/conf.d/welcome.conf',anaconda.rootPath + '/etc/httpd/conf.d/welcome.conf.backup')
+        shutil.copy2(anaconda.rootPath + '/usr/share/doc/abiquo-ui/abiquo.conf',anaconda.rootPath + '/etc/httpd/conf.d/abiquo.conf')
+        iutil.execWithRedirect("/sbin/chkconfig",
+                                ['httpd', "on"],
+                                stdout="/dev/tty5", stderr="/dev/tty5",
+                                root=anaconda.rootPath)
 
     if anaconda.backend.isGroupSelected('abiquo-lvm-storage-server'):
                 iutil.execWithRedirect("/sbin/chkconfig",
@@ -233,9 +171,8 @@ exit 0
                                         ['abiquo-lvmiscsi', "on"],
                                         stdout="/dev/tty5", stderr="/dev/tty5",
                                         root=anaconda.rootPath)
-    
+
     if anaconda.backend.isGroupSelected('abiquo-server'):
-        # Disable zookeeper by default
         iutil.execWithRedirect("/sbin/chkconfig",
                                 ['zookeeper', "off"],
                                 stdout="/dev/tty5", stderr="/dev/tty5",
@@ -244,21 +181,24 @@ exit 0
                                 ['redis', "on"],
                                 stdout="/dev/tty5", stderr="/dev/tty5",
                                         root=anaconda.rootPath)
-    
+    if anaconda.backend.isGroupSelected('abiquo-standalone-api'):
+        iutil.execWithRedirect("/sbin/chkconfig",
+                                ['zookeeper', "on"],
+                                stdout="/dev/tty5", stderr="/dev/tty5",
+                                        root=anaconda.rootPath)
     if anaconda.backend.isGroupSelected('abiquo-monolithic'):
         iutil.execWithRedirect("/sbin/chkconfig",
                                 ['redis', "on"],
                                 stdout="/dev/tty5", stderr="/dev/tty5",
                                 root=anaconda.rootPath)
         iutil.execWithRedirect("/sbin/chkconfig",
-                                ['iptables', "off"],
+                                ['httpd', "on"],
                                 stdout="/dev/tty5", stderr="/dev/tty5",
                                 root=anaconda.rootPath)
         iutil.execWithRedirect("/sbin/chkconfig",
                                 ['dhcpd', "on"],
                                 stdout="/dev/tty5", stderr="/dev/tty5",
                                 root=anaconda.rootPath)
-
     if anaconda.backend.isGroupSelected('abiquo-remote-services'):
         iutil.execWithRedirect("/sbin/chkconfig",
                                 ['redis', "on"],

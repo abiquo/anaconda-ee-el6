@@ -26,9 +26,10 @@ class AbiquoV2V:
         if flags.test:
             return
 
-	# Write only if V2V present and remote services not installed
+        # Write only if V2V present and remote services not installed
+        # !!! We should handle this outside.
         if os.path.isdir(instPath + "/opt/abiquo/tomcat/webapps/bpm-async") and not \
-			os.path.isdir(instPath + "/opt/abiquo/tomcat/webapps/vsm"):
+            os.path.isdir(instPath + "/opt/abiquo/tomcat/webapps/vsm"):
             f = open(instPath + "/opt/abiquo/config/abiquo.properties", 'a')
             f.write("[remote-services]\n")
             f.write("abiquo.rabbitmq.username = %s\n" %
@@ -44,11 +45,11 @@ class AbiquoV2V:
             f.close()
 
     def writeKS(self, f):
-	    pass
+        pass
 
     def __init__(self):
         self.abiquo_rabbitmq_username = 'guest'
         self.abiquo_rabbitmq_password = 'guest'
         self.abiquo_rabbitmq_host = '127.0.0.1'
         self.abiquo_rabbitmq_port = '5672'
-	self.abiquo_datacenter_id = 'Abiquo'
+        self.abiquo_datacenter_id = 'Abiquo'

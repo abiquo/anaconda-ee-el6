@@ -40,7 +40,7 @@ class InstallClass(BaseInstallClass):
 
     bootloaderTimeoutDefault = 5
     bootloaderExtraArgs = ["crashkernel=auto"]
-
+    # !!! Check if needed...
     tasks =  [
               (N_("LVM Storage Server"), ["abiquo-lvm-storage-server"]),
               (N_("Abiquo Server"), ["abiquo-server"]),
