@@ -145,7 +145,7 @@ class AbiquoPlatformTasks(gtk.TreeView):
                         self.anaconda.id.abiquo.selectedGroups.remove(row[2])
 
 # KVM
-# Legacy hypervisors XEN and VirtualBox not supported
+# Legacy hypervisors XEN and VirtualBox not supported now
 class AbiquoHypervisorTasks(AbiquoPlatformTasks):
  
      def __init__(self, anaconda):
@@ -188,64 +188,24 @@ class TaskWindow(InstallWindow):
 
         self.dispatch.skipStep("abiquo_password", skip = 1)
         self.dispatch.skipStep("abiquo_nfs_config", skip = 1)
+        self.dispatch.skipStep("abiquo_rs", skip = 1)
+        self.dispatch.skipStep("abiquo_v2v", skip = 1)
+        self.dispatch.skipStep("abiquo_hv", skip = 1)
+        self.dispatch.skipStep("abiquo_distributed", skip = 1)
+        self.dispatch.skipStep("abiquo_dhcp_relay", skip = 1)
 
         for g in self.abiquo_groups:
             if g in self.anaconda.id.abiquo.selectedGroups:
                 log.info("Selecting group: %s " % g)
                 map(lambda x: self.backend.selectGroup(x), [g])
-
-        # !!! moved to postinstall
-        for g in ['abiquo-remote-services', 'abiquo-monolithic']:
-            if g not in self.anaconda.id.abiquo.selectedGroups:
-                self.dispatch.skipStep("abiquo_rs", skip = 1)
-                self.dispatch.skipStep("abiquo_v2v", skip = 1)
-        
+       
         for g in ['abiquo-server', 'abiquo-monolithic']:
             if g in self.anaconda.id.abiquo.selectedGroups:
                 self.dispatch.skipStep("abiquo_password", skip = 0)
 
-        # !!! moved to postinstall
-        if (('abiquo-monolithic' in self.anaconda.id.abiquo.selectedGroups) and \
-                ('abiquo-nfs-repository' in self.anaconda.id.abiquo.selectedGroups)) or \
-                ('abiquo-dhcp-relay' in self.anaconda.id.abiquo.selectedGroups) or \
-                ('abiquo-lvm-storage-server' in self.anaconda.id.abiquo.selectedGroups) :
-                    self.dispatch.skipStep("abiquo_nfs_config", skip = 1)
-
-        if 'abiquo-distributed' not in self.anaconda.id.abiquo.selectedGroups:
-            self.dispatch.skipStep("abiquo_distributed", skip = 1)
-        else:
+        if 'abiquo-distributed' in self.anaconda.id.abiquo.selectedGroups:
             self.dispatch.skipStep("abiquo_distributed", skip = 0)
-
-        # !!! moved to postinstall
-        if ('abiquo-kvm' in self.anaconda.id.abiquo.selectedGroups):
-            self.dispatch.skipStep("abiquo_hv", skip = 0)
-            self.dispatch.skipStep("abiquo_nfs_config", skip = 1, permanent = 1)
-        else:
-            self.dispatch.skipStep("abiquo_hv", skip = 1)
-
-        # !!! remove this
-        # if 'abiquo-remote-repository' in self.anaconda.id.abiquo.selectedGroups:
-        #    if 'abiquo-distributed' in self.anaconda.id.abiquo.selectedGroups:
-        #        self.intf.messageWindow(_("<b>Warning</b>"),
-        #                   _("<b>Overlapping tasks selected</b>\n\n"
-        #                     "You have selected <i>Abiquo Distributed</i> install. "
-        #                     "Selecting Abiquo Remote Repository is not allowed. Please, "
-        #                     "deselect Abiquo Remote Repository and click next."),
-        #                            type="warning")
-        #        raise gui.StayOnScreen
-        #    
-        #    if 'abiquo-monolithic' in self.anaconda.id.abiquo.selectedGroups:
-        #        self.intf.messageWindow(_("<b>Warning</b>"),
-        #                   _("<b>Overlapping tasks selected</b>\n\n"
-        #                     "You have selected <i>Abiquo Distributed</i> install. "
-        #                     "Selecting Abiquo Remote Repository is not allowed. Please, "
-        #                     "deselect Abiquo Remote Repository and click next."),
-        #                            type="warning")
-        #        raise gui.StayOnScreen
-
-        if not ('abiquo-dhcp-relay' in self.anaconda.id.abiquo.selectedGroups):
-            self.dispatch.skipStep("abiquo_dhcp_relay", skip = 1)
-        else:
+        if 'abiquo-dhcp-relay' in self.anaconda.id.abiquo.selectedGroups:
             self.dispatch.skipStep("abiquo_dhcp_relay", skip = 0)
         
     def _task_store_sel_changed(self, tree_selection):

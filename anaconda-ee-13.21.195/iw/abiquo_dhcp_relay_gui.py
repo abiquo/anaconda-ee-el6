@@ -13,10 +13,8 @@ import gtk.glade
 import gobject
 import gui
 from iw_gui import *
-#from rhpl.translate import _, N_
 from constants import productName
 
-# from netconfig_dialog import NetworkConfigurator
 import network
 import socket
 
@@ -30,8 +28,8 @@ class AbiquoDHCPRelayWindow(InstallWindow):
         self.data.abiquo.abiquo_dhcprelay_vrange_2 = self.xml.get_widget('vrange_2').get_text()
 
         if int(self.data.abiquo.abiquo_dhcprelay_vrange_1) >= int(self.data.abiquo.abiquo_dhcprelay_vrange_2):
-            self.intf.messageWindow("<b>VLAN Range Error</b>",
-                       "<b>Invalid Range</b>\n\n"
+            self.intf.messageWindow("VLAN Range Error",
+                       "Invalid Range\n\n"
                          "VLAN Range 1 is equal or greater than VLAN Range 2",
                                 type="warning")
             raise gui.StayOnScreen
@@ -39,7 +37,7 @@ class AbiquoDHCPRelayWindow(InstallWindow):
         combo = self.xml.get_widget('management_if')
         iter = combo.get_active_iter()
         if not iter:
-            self.intf.messageWindow("<b>Invalid Interface</b>",
+            self.intf.messageWindow("Invalid Interface",
                        "Invalid management interface selected",
                                 type="warning")
             raise gui.StayOnScreen
@@ -48,7 +46,7 @@ class AbiquoDHCPRelayWindow(InstallWindow):
         combo = self.xml.get_widget('service_if')
         iter = combo.get_active_iter()
         if not iter:
-            self.intf.messageWindow("<b>Invalid Interface</b>",
+            self.intf.messageWindow("Invalid Interface",
                        "Invalid relay interface selected",
                                 type="warning")
             raise gui.StayOnScreen
@@ -59,8 +57,8 @@ class AbiquoDHCPRelayWindow(InstallWindow):
         try:
             socket.inet_aton(self.data.abiquo.abiquo_dhcprelay_dhcpd_ip.strip())
         except socket.error:
-            self.intf.messageWindow("<b>IP Error</b>",
-                       "<b>Invalid DHCP Server IP Address</b>\n\n"
+            self.intf.messageWindow("IP Error",
+                       "Invalid DHCP Server IP Address\n\n"
                          "%s is not a valid IP Address" % self.data.abiquo.abiquo_dhcprelay_dhcpd_ip,
                                 type="warning")
             raise gui.StayOnScreen
