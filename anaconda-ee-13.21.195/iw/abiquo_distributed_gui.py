@@ -38,11 +38,7 @@ class AbiquoDistributedWindow(InstallWindow):
             if g in self.anaconda.id.abiquo.selectedGroups:
                 self.dispatch.skipStep("abiquo_nfs_config", skip = 1, permanent = 1)
 
-        if ('abiquo-remote-services' in self.anaconda.id.abiquo.selectedGroups):
-            self.dispatch.skipStep("abiquo_rs", skip = 0)
-            self.dispatch.skipStep("abiquo_v2v", skip = 1)
-        else:
-            self.dispatch.skipStep("abiquo_rs", skip = 1)
+
         
 	if ('abiquo-v2v' in self.anaconda.id.abiquo.selectedGroups) and not \
 		('abiquo-remote-services' in self.anaconda.id.abiquo.selectedGroups):
@@ -106,10 +102,13 @@ class AbiquoDistributedWindow(InstallWindow):
         for g in self.data.abiquo.selectedGroups:
             if g == 'abiquo-server':
                 self.xml.get_widget('AbiquoServerRadio').set_active(True)
+                self.xml.get_widget('AbiquoGUIRadio').set_sensitive(False)
+                self.xml.get_widget('AbiquoAPIRadio').set_sensitive(False)
             elif g == 'abiquo-v2v':
                 self.xml.get_widget('AbiquoV2VRadio').set_active(True)
             elif g == 'abiquo-remote-services':
                 self.xml.get_widget('AbiquoRSRadio').set_active(True)
+                self.xml.get_widget('AbiquoPublicRadio').set_sensitive(False)
             elif g == 'abiquo-standalone-ui':
                 self.xml.get_widget('AbiquoGUIRadio').set_active(True)
             elif g == 'abiquo-standalone-api':
