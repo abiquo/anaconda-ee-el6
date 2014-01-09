@@ -48,6 +48,11 @@ def abiquoPostInstall(anaconda):
                             stdout="/dev/tty5", stderr="/dev/tty5",
                             root=anaconda.rootPath)
 
+    iutil.execWithRedirect("/sbin/chkconfig",
+                            ['ip6tables', "off"],
+                            stdout="/dev/tty5", stderr="/dev/tty5",
+                            root=anaconda.rootPath)
+
     # Disable SElinux
     f = fileinput.FileInput(anaconda.rootPath + "/etc/sysconfig/selinux",inplace=1)
     for line in f:
