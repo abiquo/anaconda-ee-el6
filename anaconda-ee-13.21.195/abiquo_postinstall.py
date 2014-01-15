@@ -204,7 +204,8 @@ def abiquoPostInstall(anaconda):
                                 ['dhcpd', "on"],
                                 stdout="/dev/tty5", stderr="/dev/tty5",
                                 root=anaconda.rootPath)
-    if anaconda.backend.isGroupSelected('abiquo-remote-services'):
+    if anaconda.backend.isGroupSelected('abiquo-remote-services') or \
+            anaconda.backend.isGroupSelected('abiquo-public-services'):
         iutil.execWithRedirect("/sbin/chkconfig",
                                 ['redis', "on"],
                                 stdout="/dev/tty5", stderr="/dev/tty5",
