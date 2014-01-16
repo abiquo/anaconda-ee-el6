@@ -158,7 +158,7 @@ def abiquoPostInstall(anaconda):
         newschema.close()
     if anaconda.backend.isGroupSelected('abiquo-server') or \
             anaconda.backend.isGroupSelected('abiquo-monolithic') or \
-            anaconda.backend.isGroupSelected('abiquo-standalone-ui') :
+            anaconda.backend.isGroupSelected('abiquo-ui') :
         if os.path.exists(anaconda.rootPath + '/etc/httpd/conf.d/welcome.conf'):
             shutil.move(anaconda.rootPath + '/etc/httpd/conf.d/welcome.conf',anaconda.rootPath + '/etc/httpd/conf.d/welcome.conf.backup')
         shutil.copy2(anaconda.rootPath + '/usr/share/doc/abiquo-ui/abiquo.conf',anaconda.rootPath + '/etc/httpd/conf.d/abiquo.conf')
@@ -205,7 +205,7 @@ def abiquoPostInstall(anaconda):
                                 stdout="/dev/tty5", stderr="/dev/tty5",
                                 root=anaconda.rootPath)
     if anaconda.backend.isGroupSelected('abiquo-remote-services') or \
-            anaconda.backend.isGroupSelected('abiquo-public-services'):
+            anaconda.backend.isGroupSelected('abiquo-public-cloud'):
         iutil.execWithRedirect("/sbin/chkconfig",
                                 ['redis', "on"],
                                 stdout="/dev/tty5", stderr="/dev/tty5",

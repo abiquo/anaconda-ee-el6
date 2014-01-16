@@ -32,7 +32,7 @@ The installation types and main components are as follows:
 For small installations. Includes: Abiquo Server, Remote Services, V2V Services
 
 <u>Distributed</u>
-For large installations. Select combination of: Abiquo Server or only GUI or API, Abiquo Remote Services or Abiquo Public Services,  and Abiquo V2V Services.
+For large installations. Select combination of: Abiquo Server or only GUI or API, Abiquo Remote Services or Abiquo Public Cloud Services,  and Abiquo V2V Services.
 
 """
 
@@ -108,7 +108,7 @@ class AbiquoPlatformTasks(gtk.TreeView):
 
         # Check if no abiquo groups have been selected
         sel = True
-        for g in ['abiquo-server', 'abiquo-remote-services', 'abiquo-v2v', 'abiquo-monolithic','abiquo-standalone-ui','abiquo-standalone-api','abiquo-public-services']:
+        for g in ['abiquo-server', 'abiquo-remote-services', 'abiquo-v2v', 'abiquo-monolithic','abiquo-ui','abiquo-standalone-api','abiquo-public-cloud']:
             if g in self.anaconda.id.abiquo.selectedGroups:
                 sel = False
         self.store.append([sel, "None", 'none'])
@@ -119,7 +119,7 @@ class AbiquoPlatformTasks(gtk.TreeView):
 
         # check if distributed previously selected
         sel = False
-        for g in ['abiquo-server', 'abiquo-remote-services', 'abiquo-v2v', 'abiquo-standalone-ui','abiquo-standalone-api','abiquo-public-services']:
+        for g in ['abiquo-server', 'abiquo-remote-services', 'abiquo-v2v', 'abiquo-ui','abiquo-standalone-api','abiquo-public-cloud']:
             if g in self.anaconda.id.abiquo.selectedGroups:
                 sel = True
         self.store.append([sel, "Distributed Install", 'abiquo-distributed'])
@@ -254,7 +254,7 @@ class TaskWindow(InstallWindow):
         self.anaconda = anaconda
         self.abiquo_groups = ['abiquo-monolithic',
                   'abiquo-server', 'abiquo-remote-services', 'abiquo-v2v',
-                  'abiquo-standalone-ui','abiquo-standalone-api','abiquo-public-services',
+                  'abiquo-ui','abiquo-standalone-api','abiquo-public-cloud',
                   'abiquo-lvm-storage-server', 'abiquo-kvm',
                   'abiquo-dhcp-relay', 'abiquo-nfs-repository',
                   'abiquo-remote-repository'

@@ -53,8 +53,8 @@ class AbiquoDistributedWindow(InstallWindow):
         if btn.get_active():
             if lbl == 'AbiquoServerRadio':
                 self.data.abiquo.selectedGroups.append('abiquo-server')
-                if ('abiquo-standalone-ui' in self.anaconda.id.abiquo.selectedGroups):
-                    self.data.abiquo.selectedGroups.remove('abiquo-standalone-ui')
+                if ('abiquo-ui' in self.anaconda.id.abiquo.selectedGroups):
+                    self.data.abiquo.selectedGroups.remove('abiquo-ui')
                 if ('abiquo-standalone-api' in self.anaconda.id.abiquo.selectedGroups):
                     self.data.abiquo.selectedGroups.remove('abiquo-standalone-api')
                 self.xml.get_widget('AbiquoGUIRadio').set_active(False)
@@ -63,18 +63,18 @@ class AbiquoDistributedWindow(InstallWindow):
                 self.xml.get_widget('AbiquoAPIRadio').set_sensitive(False)
             elif lbl == 'AbiquoRSRadio':
                 self.data.abiquo.selectedGroups.append('abiquo-remote-services')
-                if ('abiquo-public-services' in self.anaconda.id.abiquo.selectedGroups):
-                    self.data.abiquo.selectedGroups.remove('abiquo-public-services')
+                if ('abiquo-public-cloud' in self.anaconda.id.abiquo.selectedGroups):
+                    self.data.abiquo.selectedGroups.remove('abiquo-public-cloud')
                 self.xml.get_widget('AbiquoPublicRadio').set_active(False)
                 self.xml.get_widget('AbiquoPublicRadio').set_sensitive(False)
             elif lbl == 'AbiquoV2VRadio':
                 self.data.abiquo.selectedGroups.append('abiquo-v2v')
             elif lbl == 'AbiquoGUIRadio':
-                self.data.abiquo.selectedGroups.append('abiquo-standalone-ui')
+                self.data.abiquo.selectedGroups.append('abiquo-ui')
             elif lbl == 'AbiquoAPIRadio':
                 self.data.abiquo.selectedGroups.append('abiquo-standalone-api')
             elif lbl == 'AbiquoPublicRadio':
-                self.data.abiquo.selectedGroups.append('abiquo-public-services')
+                self.data.abiquo.selectedGroups.append('abiquo-public-cloud')
         else:
             if lbl == 'AbiquoServerRadio':
                 self.data.abiquo.selectedGroups.remove('abiquo-server')
@@ -85,12 +85,12 @@ class AbiquoDistributedWindow(InstallWindow):
                 self.xml.get_widget('AbiquoPublicRadio').set_sensitive(True)
             elif lbl == 'AbiquoV2VRadio':
                 self.data.abiquo.selectedGroups.remove('abiquo-v2v')
-            elif lbl == 'AbiquoGUIRadio' and ('abiquo-standalone-ui' in self.anaconda.id.abiquo.selectedGroups):
-                self.data.abiquo.selectedGroups.remove('abiquo-standalone-ui')
+            elif lbl == 'AbiquoGUIRadio' and ('abiquo-ui' in self.anaconda.id.abiquo.selectedGroups):
+                self.data.abiquo.selectedGroups.remove('abiquo-ui')
             elif lbl == 'AbiquoAPIRadio' and ('abiquo-standalone-api' in self.anaconda.id.abiquo.selectedGroups):
                 self.data.abiquo.selectedGroups.remove('abiquo-standalone-api')
-            elif lbl == 'AbiquoPublicRadio' and ('abiquo-public-services' in self.anaconda.id.abiquo.selectedGroups):
-                self.data.abiquo.selectedGroups.remove('abiquo-public-services')
+            elif lbl == 'AbiquoPublicRadio' and ('abiquo-public-cloud' in self.anaconda.id.abiquo.selectedGroups):
+                self.data.abiquo.selectedGroups.remove('abiquo-public-cloud')
 
     def getScreen (self, anaconda):
         self.anaconda = anaconda
@@ -109,11 +109,11 @@ class AbiquoDistributedWindow(InstallWindow):
             elif g == 'abiquo-remote-services':
                 self.xml.get_widget('AbiquoRSRadio').set_active(True)
                 self.xml.get_widget('AbiquoPublicRadio').set_sensitive(False)
-            elif g == 'abiquo-standalone-ui':
+            elif g == 'abiquo-ui':
                 self.xml.get_widget('AbiquoGUIRadio').set_active(True)
             elif g == 'abiquo-standalone-api':
                 self.xml.get_widget('AbiquoAPIRadio').set_active(True)
-            elif g == 'abiquo-public-services':
+            elif g == 'abiquo-public-cloud':
                 self.xml.get_widget('AbiquoPublicRadio').set_active(True)
             else:
                 pass
