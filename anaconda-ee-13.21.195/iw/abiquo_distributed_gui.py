@@ -21,11 +21,6 @@ from iw_gui import *
 
 class AbiquoDistributedWindow(InstallWindow):
     def getNext(self):
-        #self.data.abiquo.selectedGroups += self.selected_tasks
-        #for g in ['abiquo-server', 'abiquo-remote-services', 'abiquo-v2']:
-        #    if g not in self.data.abiquo.selectedGroups:
-        #        map(self.backend.deselectGroup, [g])
-        
         # remove previously selected group not present now
         map(self.backend.selectGroup, self.data.abiquo.selectedGroups)
         
@@ -48,8 +43,6 @@ class AbiquoDistributedWindow(InstallWindow):
         
     def _selectionChanged(self, btn):
         lbl = btn.get_name()
-        #if not btn.get_sensitive():
-        #    btn.set_active(False)
         if btn.get_active():
             if lbl == 'AbiquoServerRadio':
                 self.data.abiquo.selectedGroups.append('abiquo-server')
@@ -99,25 +92,17 @@ class AbiquoDistributedWindow(InstallWindow):
         self.dispatch = anaconda.dispatch
         (self.xml, vbox) = gui.getGladeWidget("abiquo_distributed.glade", "settingsBox")
 
-        for g in self.data.abiquo.selectedGroups:
-            if g == 'abiquo-server':
-                self.xml.get_widget('AbiquoServerRadio').set_active(True)
-                self.xml.get_widget('AbiquoGUIRadio').set_sensitive(False)
-                self.xml.get_widget('AbiquoAPIRadio').set_sensitive(False)
-            elif g == 'abiquo-v2v':
-                self.xml.get_widget('AbiquoV2VRadio').set_active(True)
-            elif g == 'abiquo-remote-services':
-                self.xml.get_widget('AbiquoRSRadio').set_active(True)
-                self.xml.get_widget('AbiquoPublicRadio').set_sensitive(False)
-            elif g == 'abiquo-ui':
-                self.xml.get_widget('AbiquoGUIRadio').set_active(True)
-            elif g == 'abiquo-standalone-api':
-                self.xml.get_widget('AbiquoAPIRadio').set_active(True)
-            elif g == 'abiquo-public-cloud':
-                self.xml.get_widget('AbiquoPublicRadio').set_active(True)
-            else:
-                pass
+        # Clean selections if we go back
+        for g in ['abiquo-server','abiquo-ui','abiquo-standalone-api','abiquo-remote-services','abiquo-public-cloud','abiquo-v2v']:
+            if g in self.anaconda.id.abiquo.selectedGroups:
+                self.anaconda.id.abiquo.selectedGroups.remove(g)
+                self.anaconda.backend.deselectGroup(g)
+            if g in self.data.abiquo.selectedGroups:
+                self.data.abiquo.selectedGroups.remove(g)
+                self.anaconda.backend.deselectGroup(g)
         for btn in ['AbiquoServerRadio', 'AbiquoRSRadio', 'AbiquoV2VRadio', 'AbiquoGUIRadio', 'AbiquoAPIRadio','AbiquoPublicRadio']:
+            self.xml.get_widget(btn).set_active(False)
+            self.xml.get_widget(btn).set_sensitive(True)
             self.xml.get_widget(btn).connect(
                     'toggled',
                     self._selectionChanged)
