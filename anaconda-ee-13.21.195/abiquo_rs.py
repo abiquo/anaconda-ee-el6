@@ -49,12 +49,6 @@ class AbiquoRS:
                     self.abiquo_nfs_repository)
             f.write("#abiquo.virtualfactory.xenserver.repositoryLocation = %s\n" %
                     self.abiquo_nfs_repository)
-            f.write("#abiquo.virtualfactory.storagelink.user = %s\n" %
-                    self.abiquo_virtualfactory_storagelink_user)
-            f.write("#abiquo.virtualfactory.storagelink.password = %s\n" %
-                    self.abiquo_virtualfactory_storagelink_password)
-            f.write("#abiquo.virtualfactory.storagelink.address = %s\n" %
-                    self.abiquo_virtualfactory_storagelink_address)
             f.write("abiquo.redis.port = %s\n" %
                     self.abiquo_redis_port)
             f.write("abiquo.redis.host = %s\n" %
@@ -91,9 +85,6 @@ class AbiquoRS:
         self.abiquo_appliancemanager_repositoryLocation  = '<nfs-server-ip>:/opt/vm_repository/'
         self.abiquo_virtualfactory_hyperv_repositoryLocation = '//127.0.0.1/vm_repository/'
         self.abiquo_virtualfactory_xenserver_repositoryLocation = '127.0.0.1:/opt/vm_repository/'
-        self.abiquo_virtualfactory_storagelink_address = 'https://127.0.0.1:21605'
-        self.abiquo_virtualfactory_storagelink_user = 'admin'
-        self.abiquo_virtualfactory_storagelink_password = 'storagelink'
         self.abiquo_redis_host =  '127.0.0.1'
         self.abiquo_redis_port = '6379'
         self.abiquo_dvs_vcenter_password = 'change-me'
