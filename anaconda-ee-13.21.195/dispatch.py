@@ -73,7 +73,8 @@ installSteps = [
     ("filter", ),
     ("storageinit", storageInitialize, ),
     ("findrootparts", findRootParts, ),
-    ("findinstall", ),
+    # Uncomment to enable upgrades
+    # ("findinstall", ),
     ("network", ),
     ("timezone", ),
     ("accounts", ),
