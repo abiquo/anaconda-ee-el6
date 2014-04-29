@@ -8,6 +8,7 @@ import glob
 import network
 import isys
 import stat
+import string
 log = logging.getLogger("anaconda")
 import fileinput
 
@@ -141,21 +142,40 @@ def abiquoPostInstall(anaconda):
                                 root=anaconda.rootPath)
         schema = open(anaconda.rootPath + "/usr/share/doc/abiquo-server/database/kinton-schema.sql")
  
-        # md5 hash is replaced by bcrypt salted hash at first login
-        newschema = open(anaconda.rootPath + "/tmp/kinton-schema.sql", 'w')
-        for line in schema.readlines():
-            newschema.write(re.sub('c69a39bd64ffb77ea7ee3369dce742f3', anaconda.id.abiquoPasswordHex, line))
-            newschema.write("\n")   
-        newschema.close()
         # create the schema
-        newschema = open(anaconda.rootPath + "/tmp/kinton-schema.sql")
         iutil.execWithRedirect("/usr/bin/mysql",
                                 [],
-                                stdin=newschema,
+                                stdin=schema,
                                 stdout="/mnt/sysimage/var/log/abiquo-postinst.log", stderr="/mnt/sysimage/var/log/abiquo-postinst.log",
                                 root=anaconda.rootPath)
+
+        #Setting admin's password
+        iutil.execWithRedirect("/usr/bin/mysql",
+                                ["kinton", "-e", "update credential set password = '%s' where idUser = 1" % anaconda.id.abiquoPasswordHex],
+                                stdin=schema,
+                                stdout="/mnt/sysimage/var/log/abiquo-postinst.log", stderr="/mnt/sysimage/var/log/abiquo-postinst.log",
+                                root=anaconda.rootPath)
+
+        chars = string.letters + string.digits + '+/'
+        assert 256 % len(chars) == 0  # non-biased later modulo
+        PWD_LEN = 32
+        m_pass =  ''.join(chars[ord(c) % len(chars)] for c in os.urandom(PWD_LEN))
+
+        #Setting admin's password
+        iutil.execWithRedirect("/usr/bin/mysql",
+                                ["kinton", "-e", "update credential set password = '%s' where idUser = 3" % m_pass],
+                                stdin=schema,
+                                stdout="/mnt/sysimage/var/log/abiquo-postinst.log", stderr="/mnt/sysimage/var/log/abiquo-postinst.log",
+                                root=anaconda.rootPath)
+
+        #Writing the password to the conf file
+        f = open(anaconda.rootPath + "/opt/abiquo/config/abiquo.properties", "a")
+        f.write("abiquo.m.identity = default_m_user\n")
+        f.write("abiquo.m.credential = %s\n" % m_pass)
+        f.close()
+
         schema.close()
-        newschema.close()
+
     if anaconda.backend.isGroupSelected('abiquo-server') or \
             anaconda.backend.isGroupSelected('abiquo-monolithic') or \
             anaconda.backend.isGroupSelected('abiquo-ui') :
