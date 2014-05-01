@@ -11,6 +11,7 @@ import stat
 import string
 log = logging.getLogger("anaconda")
 import fileinput
+import hashlib
 
 def abiquoPostInstall(anaconda):
     log.info("Abiquo postinstall")
@@ -156,14 +157,16 @@ def abiquoPostInstall(anaconda):
                                 stdout="/mnt/sysimage/var/log/abiquo-postinst.log", stderr="/mnt/sysimage/var/log/abiquo-postinst.log",
                                 root=anaconda.rootPath)
 
-        chars = string.letters + string.digits + '+/'
+        chars = string.letters + string.digits + '-_'
         assert 256 % len(chars) == 0  # non-biased later modulo
         PWD_LEN = 32
         m_pass =  ''.join(chars[ord(c) % len(chars)] for c in os.urandom(PWD_LEN))
+        m = hashlib.md5()
+        m.update(m_pass)
 
         #Setting admin's password
         iutil.execWithRedirect("/usr/bin/mysql",
-                                ["kinton", "-e", "update credential set password = '%s' where idUser = 3" % m_pass],
+                                ["kinton", "-e", "update credential set password = '%s' where idUser = 3" % m.hexdigest()],
                                 stdin=schema,
                                 stdout="/mnt/sysimage/var/log/abiquo-postinst.log", stderr="/mnt/sysimage/var/log/abiquo-postinst.log",
                                 root=anaconda.rootPath)
