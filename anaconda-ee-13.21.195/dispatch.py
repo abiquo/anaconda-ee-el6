@@ -68,7 +68,7 @@ installSteps = [
     ("welcome", ),
     #("language", ),
     ("keyboard", ),
-    ("betanag", betaNagScreen, ),
+    #("betanag", betaNagScreen, ),
     ("filtertype", ),
     ("filter", ),
     ("storageinit", storageInitialize, ),
