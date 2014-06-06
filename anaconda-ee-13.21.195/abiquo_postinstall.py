@@ -173,7 +173,7 @@ def abiquoPostInstall(anaconda):
 
         #Writing the password to the conf file
         f = open(anaconda.rootPath + "/opt/abiquo/config/abiquo.properties", "a")
-        f.write("abiquo.m.identity = default_m_user\n")
+        f.write("abiquo.m.identity = default_outbound_api_user\n")
         f.write("abiquo.m.credential = %s\n" % m_pass)
         f.close()
 
